@@ -7,4 +7,12 @@
 *.iml
 out
 gen
+# copied from Angular seed
+logs/*
+!.gitkeep
+node_modules/
+/public/bower_components/
+tmp
+.DS_Store
+
 
