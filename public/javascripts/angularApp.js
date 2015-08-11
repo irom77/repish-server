@@ -9,7 +9,6 @@ var app = angular.module("angularApp", [])
     customService.getData().then(function(response) {
         $scope.myTextArea = response.data;
     });
-    //$scope.clear = function() {$scope.myTextArea = "";};
     $scope.save  = function(data, filename) {
         data = $("#textarea").val().replace(/\n/g, '\r\n');
         //data = $scope.myTextArea;
