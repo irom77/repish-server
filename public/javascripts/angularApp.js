@@ -7,6 +7,7 @@ var app = angular.module("angularApp", [])
     //    $scope.myTextArea = data;
     //});
     customService.getData().then(function(response) {
+        console.log(response.data);
         $scope.myTextArea = response.data;
     });
     $scope.save  = function(data, filename) {
