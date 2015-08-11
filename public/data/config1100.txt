@@ -1,0 +1,2 @@
+This is {{message1}} in 1st line
+This is {{message2}} in last line
