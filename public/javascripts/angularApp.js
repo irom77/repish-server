@@ -20,6 +20,6 @@ var app = angular.module("angularApp", [])
 })
 .service ('customService',function($http) {
     this.getData=function() {
-        return $http.get('localhost:3000/data/config1100.txt');
+        return $http.get('nms01m:3000/data/config1100.txt');
     }
 });
