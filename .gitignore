@@ -12,9 +12,10 @@ logs/*
 !.gitkeep
 node_modules/
 /public/bower_components/
-tmp
-.DS_Store
 /public/data/
 /views/index.*
+tmp
+.DS_Store
+
 
 
