@@ -9,15 +9,90 @@
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
   <link rel="stylesheet" href="stylesheets/style.css">
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
 </head>
 <body ng-app="angularApp">
 <div ng-controller="myConfigGenCtrl">
   <form name="myform">
-    <p><input type="text" ng-model="message1"/>Message1</p>
-    <p><input type="text" ng-model="message2"/>Message2</p>
+    <p><input type="text" ng-model="hostname"/> Firewall hostname
+    <input type="text" ng-model="subnet"/> Firewall subnet</p>
+    <p><input type="text" ng-model="InternalSSID"/> Internal SSID
+    <input type="text" ng-model="InternalPW"/> Internal PW</p>
+    <p><input type="text" ng-model="GuestSSID"/> Guest SSID
+    <input type="text" ng-model="GuestPW"/> Guest PW</p>
   </form>
-  <p><textarea type="text" id="textarea" model="myTextArea" cols="80" rows="10" >
-{{myTextArea}}
+  <p><textarea type="text" id="textarea"  cols="80" rows="10" >
+#Script created for use with office: {{hostname}}
+#Configuration Script
+
+#Turn off First-time Wizard
+set property first-time-wizard off
+
+#Set Time-Zone
+set time-zone GMT-05:00(Eastern-Time[US-and-Canada])
+
+#Hostname
+set hostname {{hostname}}
+
+#WAN Settings (DHCP)
+add internet-connection interface WAN type dhcp conn-test-timeout 5
+
+#DNS (Internet Connection Only)
+set dns primary ipv4-address 198.6.1.2
+set dns secondary ipv4-address 4.2.2.2
+
+#NTP Settings
+set ntp server primary north-america.pool.ntp.org
+set ntp server secondary pool.ntp.org
+set ntp active on
+
+#Adding Users
+set user admin type admin password-hash $1$6zJjdYkd$APwn9oEj5GMco9S6WEvbd/
+add user HDLevel2 type admin password-hash $1$NpI82G.X$klRkKTXgnt6iEAxoSGD2C.
+add user HDLevel1 type admin password-hash $1$pvnKWs.B$KLcV1tko6fSetB1pwYO8C/ permission R
+set expert password-hash $1$6zJjdYkd$APwn9oEj5GMco9S6WEvbd/
+
+#Local Area Network
+set dhcp server interface LAN1_Switch disable
+set interface LAN1_Switch ipv4-address {{subnet}}.1 mask-length 24
+set dhcp server interface LAN1_Switch include-ip-pool {{subnet}}.1-{{subnet}}.255
+set dhcp server interface LAN1_Switch enable
+set interface LAN1_Switch state on
+set dhcp server interface LAN1_Switch dns primary 10.29.21.215
+set dhcp server interface LAN1_Switch dns secondary 10.110.21.215
+
+#WLAN (Password must be 8-64 characters)
+set wlan ssid {{InternalSSID}}
+set wlan radio country united-states operation-mode 11ng channel auto channel-width auto transmitter-power full
+set wlan vap {{InternalSSID}} security-type WPA/WPA2
+set wlan vap {{InternalSSID}} wpa-encryption-type Auto
+set wlan vap {{InternalSSID}} wpa-auth-type password {{InternalPW}} hotspot off
+set wlan advanced-settings hide-ssid on
+set wlan assignment LAN1Sw
+set wlan vap {{InternalSSID}} enable
+set wlan enable
+
+#Guest Wireless (Password must be 8-64 characters)
+add wlan vap ssid {{GuestSSID}}
+set wlan vap {{GuestSSID}} security-type WPA/WPA2
+set wlan vap {{GuestSSID}} wpa-encryption-type Auto
+set wlan vap {{GuestSSID}} wpa-auth-type password {{GuestPW}} hotspot off
+set wlan vap {{GuestSSID}} enable
+set dhcp server interface {{GuestSSID}} dns primary 4.2.2.2
+set dhcp server interface {{GuestSSID}} dns secondary 4.2.2.1
+
+#Domain Name
+set domainname cfnmail.com
+
+#Security Management
+set sic_init password CFNs1cC0nn3ct
+fetch certificate mgmt-ipv4-address 216.57.142.237 gateway-name {{hostname}}
+fetch policy mgmt-ipv4-address 216.57.142.237
+
+#License
+fetch license usercenter
+
+#End Configuration
     </textarea></p>
   <p>
     <button ng-click="save()">Save</button>
@@ -28,7 +103,6 @@
   -->
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
-  <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/file-saver.js/FileSaver.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="javascripts/angularApp.js"></script>
