@@ -14,5 +14,7 @@ node_modules/
 /public/bower_components/
 tmp
 .DS_Store
+/public/data/*
+/public/views/index.*
 
 

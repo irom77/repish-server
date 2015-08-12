@@ -3,26 +3,19 @@
  */
 var app = angular.module("angularApp", [])
 .controller("myConfigGenCtrl", function($scope, $http, customService) {
-    //$http.get('data/config1100.txt').success (function(data){
-    //    $scope.myTextArea = data;
-    //});
-    //$scope.myTextArea = "message1 {{message1}} message2 {{message2}}";
-    //$("#textarea").val("message1 {{message1}} message2 {{message2}}");
     //customService.getData().then(function(response) {
     //console.log(response.data);
     //   $scope.myTextArea = response.data;
     //});
     $scope.save  = function(data, filename) {
         data = $("#textarea").val().replace(/\n/g, '\r\n');
-        //data = $scope.myTextArea;
         var blob = new Blob([data], {type: "text/plain;charset=utf-8"});
-        filename = "textarea.txt";
+        filename = "autoconf.clish";
         //console.log(data);
-        //console.log($scope.message1,$scope.message2);
         saveAs(blob, filename);};
 })
 .service ('customService',function($http) {
     this.getData=function() {
-        return $http.get('http://nms01m:3000/data/config1100.txt');
+        return $http.get('http://repish:3000/data/config1100.txt');
     }
 });
