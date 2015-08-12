@@ -1,28 +1,57 @@
 <!DOCTYPE html>
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Repish</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
-  <link rel="stylesheet" href="stylesheets/style.css">
-  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
-  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Repish</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!--link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css"-->
+    <!--link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css"-->
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
 </head>
 <body ng-app="angularApp">
-<div ng-controller="myConfigGenCtrl">
-  <form name="myform">
-    <p><input type="text" ng-model="hostname"/> Firewall hostname
-    <input type="text" ng-model="subnet"/> Firewall subnet</p>
-    <p><input type="text" ng-model="InternalSSID"/> Internal SSID
-    <input type="text" ng-model="InternalPW"/> Internal PW</p>
-    <p><input type="text" ng-model="GuestSSID"/> Guest SSID
-    <input type="text" ng-model="GuestPW"/> Guest PW</p>
-  </form>
-  <p><textarea type="text" id="textarea"  cols="80" rows="10" >
-#Script created for use with office: <span>{{hostname}}</span> on {{date}}
+<div class="container">
+    <div ng-controller="myConfigGenCtrl">
+            <p></p><h3>CheckPoint 1100 Appliance config generator</h3></p>
+            <form class="form-inline">
+                <div class="form-group">
+                    <label for="hostname">Firewall hostname</label>
+                    <input type="text" ng-model="hostname" class="form-control" id="hostname" size="21"
+                           placeholder="ADVOILCHICAGOO199-125">
+                </div>
+                <div class="form-group">
+                    <label for="subnet">Firewall subnet</label>
+                    <input type="text" ng-model="subnet" class="form-control" id="subnet"
+                           placeholder="10.x.y">
+                </div>
+            </form>
+            <form class="form-inline">
+                <div class="form-group">
+                    <label for="iSSID">Internal SSID</label>
+                    <input type="text" ng-model="InternalSSID" class="form-control" id="iSSID">
+                </div>
+                <div class="form-group">
+                    <label for="iPW">Internal PW</label>
+                    <input type="text" ng-model="InternalPW" class="form-control" id="iPW">
+                </div>
+            </form>
+            <form class="form-inline">
+                <div class="form-group">
+                    <label for="gSSID">Guest SSID</label>
+                    <input type="text" ng-model="GuestSSID" class="form-control" id="gSSID">
+                </div>
+                <div class="form-group">
+                    <label for="gPW">Guest PW</label>
+                    <input type="text" ng-model="GuestPW" class="form-control" id="gPW">
+                </div>
+            </form>
+        <p><textarea class="form-control" type="text" id="textarea" cols="60" rows="20">
+#Script created for use with office: {{hostname}}
 #Configuration Script
 
 #Turn off First-time Wizard
@@ -36,6 +65,10 @@ set hostname {{hostname}}
 
 #WAN Settings (DHCP)
 add internet-connection interface WAN type dhcp conn-test-timeout 5
+#WAN Settings (Static)
+set interface WAN ipv4-address {{StaticWANIP}} subnet-mask {{WANSubnet}} default-gw {{WANDefaultGW}}
+#WAN Settings (PPPoE)
+add internet-connection interface WAN type pppoe username {{PPPoEUsername}} password {{PPPoEPassword}} conn-test-timeout 5
 
 #DNS (Internet Connection Only)
 set dns primary ipv4-address 198.6.1.2
@@ -94,20 +127,20 @@ fetch license usercenter
 
 #End Configuration
     </textarea></p>
-  <p>
-    <button ng-click="save()">Save</button>
-  </p>
+
+        <p>
+            <button ng-click="save()">Save</button>
+        </p>
+    </div>
+    <!-- In production use:
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+    -->
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/file-saver.js/FileSaver.js"></script>
+    <script src="javascripts/angularApp.js"></script>
+    <script src="components/version/version.js"></script>
+    <script src="components/version/version-directive.js"></script>
+    <script src="components/version/interpolate-filter.js"></script>
 </div>
-  <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-  -->
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-route/angular-route.js"></script>
-  <script src="bower_components/file-saver.js/FileSaver.js"></script>
-  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="javascripts/angularApp.js"></script>
-  <script src="components/version/version.js"></script>
-  <script src="components/version/version-directive.js"></script>
-  <script src="components/version/interpolate-filter.js"></script>
 </body>
 </html>
