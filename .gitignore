@@ -15,6 +15,6 @@ node_modules/
 tmp
 .DS_Store
 /public/data/
-/public/views/index.ejs
+/views/index.*
 
 
