@@ -131,12 +131,6 @@ set ntp server primary north-america.pool.ntp.org
 set ntp server secondary pool.ntp.org
 set ntp active on
 
-#Adding Users
-set user admin type admin password-hash $1$6zJjdYkd$APwn9oEj5GMco9S6WEvbd/
-add user HDLevel2 type admin password-hash $1$NpI82G.X$klRkKTXgnt6iEAxoSGD2C.
-add user HDLevel1 type admin password-hash $1$pvnKWs.B$KLcV1tko6fSetB1pwYO8C/ permission R
-set expert password-hash $1$6zJjdYkd$APwn9oEj5GMco9S6WEvbd/
-
 #Local Area Network
 set dhcp server interface LAN1_Switch disable
 set interface LAN1_Switch ipv4-address {{subnet}}.1 mask-length 24
@@ -166,13 +160,6 @@ set wlan vap {{GuestSSID}} enable
 set dhcp server interface {{GuestSSID}} dns primary 4.2.2.2
 set dhcp server interface {{GuestSSID}} dns secondary 4.2.2.1
 
-#Domain Name
-set domainname cfnmail.com
-
-#Security Management
-set sic_init password CFNs1cC0nn3ct
-fetch certificate mgmt-ipv4-address 216.57.142.237 gateway-name {{hostname}}
-fetch policy mgmt-ipv4-address 216.57.142.237
 
 #License
 fetch license usercenter
