@@ -103,14 +103,9 @@
             </div>
         </form>
         <p><textarea class="form-control" type="text" id="textarea" cols="60" rows="20">
+                <!--TEMPLATE STARTS HERE -->
 #Script created for use with office: {{hostname}}
 #Configuration Script
-
-#Turn off First-time Wizard
-set property first-time-wizard off
-
-#Set Time-Zone
-set time-zone GMT-05:00(Eastern-Time[US-and-Canada])
 
 #Hostname
 set hostname {{hostname}}
@@ -121,15 +116,6 @@ add internet-connection interface WAN type dhcp conn-test-timeout 5
 set interface WAN ipv4-address {{StaticWANIP}} subnet-mask {{WANSubnet}} default-gw {{WANDefaultGW}}
 #WAN Settings (PPPoE WAN type pppoe)
 add internet-connection interface WAN type pppoe username {{PPPoEUsername}} password {{PPPoEPassword}} conn-test-timeout 5
-
-#DNS (Internet Connection Only)
-set dns primary ipv4-address 198.6.1.2
-set dns secondary ipv4-address 4.2.2.2
-
-#NTP Settings
-set ntp server primary north-america.pool.ntp.org
-set ntp server secondary pool.ntp.org
-set ntp active on
 
 #Local Area Network
 set dhcp server interface LAN1_Switch disable
@@ -160,11 +146,8 @@ set wlan vap {{GuestSSID}} enable
 set dhcp server interface {{GuestSSID}} dns primary 4.2.2.2
 set dhcp server interface {{GuestSSID}} dns secondary 4.2.2.1
 
-
-#License
-fetch license usercenter
-
 #End Configuration
+                <!--TEMPLATE STARTS HERE -->
     </textarea></p>
 
         <p>
