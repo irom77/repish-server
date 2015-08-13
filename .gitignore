@@ -10,6 +10,7 @@ gen
 # copied from Angular seed
 logs/*
 !.gitkeep
+/test
 node_modules/
 /public/bower_components/
 /public/data/
