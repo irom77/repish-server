@@ -5,6 +5,7 @@ var app = angular.module("angularApp", [])
 .controller("myConfigGenCtrl", function($scope, $http, customService) {
     $scope.wan={addr:'dhcp'};
     $scope.ssid= {guest: 1};
+    $scope.subnet = '';
     $scope.save  = function(data, filename) {
         data = $("#textarea").val();
         if ($scope.wan.addr != 'static') data = data.replace(/.*WAN ipv4-address.*/g, '');

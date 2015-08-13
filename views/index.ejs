@@ -19,7 +19,7 @@
     <div ng-controller="myConfigGenCtrl">
         <p></p>
 
-        <h3>CheckPoint 1100 Appliance config generator</h3></p>
+        <h3>(DEV) CheckPoint 1100 Appliance config generator</h3></p>
         <form class="form-inline">
             <div class="form-group">
                 <label for="WAN">WAN</label>
@@ -31,17 +31,17 @@
                 </select>
             </div>
         </form>
-        <form class="form-inline">
+        <form novalidate class="form-inline" name="myForm">
             <div class="form-group">
-                <label for="hostname">Firewall hostname</label>
+                <label for="hostname">Hostname</label>
                 <input type="text" ng-model="hostname" class="form-control" id="hostname" size="21"
                        placeholder="ADVOILCHICAGOO199-125">
             </div>
-            <div class="form-group">
-                <label for="subnet">Firewall subnet</label>
-                <input type="text" ng-model="subnet" class="form-control" id="subnet"
-                       placeholder="10.x.y">
-            </div>
+            <div class="form-group" >
+                <label for="subnet">Subnet</label>
+                <input type="text" ng-model="subnet" class="form-control" id="subnet" size="6"
+                       required ng-pattern="/^(?:[0-9]{1,3}\.){3}$/" >
+            </div> i.e. 10.2.3. (3 bytes ending with dot)
         </form>
         <form class="form-inline" ng-show="wan.addr=='static'">
             <div class="form-group">
@@ -133,8 +133,8 @@ set ntp active on
 
 #Local Area Network
 set dhcp server interface LAN1_Switch disable
-set interface LAN1_Switch ipv4-address {{subnet}}.1 mask-length 24
-set dhcp server interface LAN1_Switch include-ip-pool {{subnet}}.1-{{subnet}}.255
+set interface LAN1_Switch ipv4-address {{subnet}}1 mask-length 24
+set dhcp server interface LAN1_Switch include-ip-pool {{subnet}}1-{{subnet}}255
 set dhcp server interface LAN1_Switch enable
 set interface LAN1_Switch state on
 set dhcp server interface LAN1_Switch dns primary 10.29.21.215

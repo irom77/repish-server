@@ -1,6 +1,10 @@
 .form-inline{
   display:inline-block;
 }
+input.ng-invalid {
+  border-color: red;
+  outline-color: red;
+}
 /*div {
   //margin: 10px 10px 10px 10px;
   top: 10px;
