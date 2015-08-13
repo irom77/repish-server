@@ -8,3 +8,10 @@
 
 ### USE:
  **http://wwww:3000/**
+ 
+### NOTICE:
+ 1100 template is included in index.ejs: 
+ 
+ <textarea class="form-control" type="text" id="textarea" cols="60" rows="20">
+ ...
+ </textarea>
