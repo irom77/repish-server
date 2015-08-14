@@ -7,6 +7,7 @@
 *.iml
 out
 gen
+TODO.md
 # copied from Angular seed
 logs/*
 !.gitkeep

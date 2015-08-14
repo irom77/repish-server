@@ -2,7 +2,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Repish</title>
+    <title>Repish DEV</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
@@ -19,7 +19,7 @@
     <div ng-controller="myConfigGenCtrl">
         <p></p>
 
-        <h3>(DEV) CheckPoint 1100 Appliance config generator</h3></p>
+        <h3>(DEV) CheckPoint 1100 (77.20+) Appliance config generator</h3></p>
         <form class="form-inline">
             <div class="form-group">
                 <label for="WAN">WAN</label>
@@ -80,6 +80,7 @@
             <div class="form-group">
                 <label for="iPW">Internal PW</label>
                 <input type="text" ng-model="InternalPW" class="form-control" id="iPW">
+                <button ng-click='getpass()'>^</button>
             </div>
         </form>
         <br>
@@ -151,7 +152,7 @@ set dhcp server interface {{GuestSSID}} dns secondary 4.2.2.1
     </textarea></p>
 
         <p>
-            <button ng-click="save()">Save</button>
+            <button ng-click="save()">Save</button> Right-Click to 'SaveAs'
         </p>
     </div>
     <!-- In production use:

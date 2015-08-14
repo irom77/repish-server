@@ -7,7 +7,7 @@
 4. forever start bin/www
 
 ### USE:
- **http://wwww:3000/**
+ **http://wwww:3001/**
  
 ### NOTICE:
  1100 template is included in index.ejs: 
