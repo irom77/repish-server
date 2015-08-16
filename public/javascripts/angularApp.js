@@ -4,16 +4,10 @@
 var app = angular.module("angularApp", [])
     .config(['$httpProvider', function($httpProvider) {
         $httpProvider.defaults.useXDomain = true;
-        //delete $httpProvider.defaults.headers.common['X-Requested-With'];
+        delete $httpProvider.defaults.headers.common['X-Requested-With'];
     }
     ])
     .controller("myConfigGenCtrl", function ($scope, $http, passwdMe) {
-        /*$http.defaults.headers.put = {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-            'Access-Control-Allow-Headers': 'Content-Type, X-Requested-With'
-        };
-        $http.defaults.useXDomain = true;*/
         $scope.wan = {addr: 'dhcp'};
         $scope.ssid = {guest: 1};
         $scope.subnet = '';
@@ -34,7 +28,8 @@ var app = angular.module("angularApp", [])
         };
         $scope.getpass = function () {
             passwdMe.getData().success(function (response) {
-                $scope.InternalPW = response.data;
+                console.log(response);
+                $scope.InternalPW = response;
             })
         };
     })

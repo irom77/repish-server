@@ -17,10 +17,8 @@
 <body ng-app="angularApp">
 <div class="container">
     <div ng-controller="myConfigGenCtrl">
-        <p></p>
-
-        <h3>(DEV) CheckPoint 1100 (77.20+) Appliance config generator</h3></p>
-        <form class="form-inline">
+        <div class="page-header"><h4>(DEV) CheckPoint 1100 Appliance config generator</h4></div>
+        <form novalidate class="form-inline" name="myForm">
             <div class="form-group">
                 <label for="WAN">WAN</label>
                 <select name=wan" ng-model="wan.addr" id="WAN">
@@ -30,129 +28,85 @@
                     <option value="pppoe">PPPOE</option>
                 </select>
             </div>
-        </form>
-        <form novalidate class="form-inline" name="myForm">
             <div class="form-group">
                 <label for="hostname">Hostname</label>
                 <input type="text" ng-model="hostname" class="form-control" id="hostname" size="21"
                        placeholder="ADVOILCHICAGOO199-125">
             </div>
-            <div class="form-group" >
+            <div class="form-group">
                 <label for="subnet">Subnet</label>
                 <input type="text" ng-model="subnet" class="form-control" id="subnet" size="6"
-                       required ng-pattern="/^(?:[0-9]{1,3}\.){3}$/" >
-            </div> i.e. 10.2.3. (3 bytes ending with dot)
+                       required ng-pattern="/^(?:[0-9]{1,3}\.){3}$/">
+
+                <p class="help-block">i.e. 10.2.3. (3 bytes ending with dot)</p>
+            </div>
         </form>
         <form class="form-inline" ng-show="wan.addr=='static'">
             <div class="form-group">
                 <label for="StaticWANIP">Static WAN IP</label>
                 <input type="text" ng-model="StaticWANIP" class="form-control" id="StaticWANIP"
-                        >
+                       size="11">
             </div>
             <div class="form-group">
                 <label for="WANSubnet">WAN Subnet</label>
                 <input type="text" ng-model="WANSubnet" class="form-control" id="WANSubnet"
-                        >
+                       size="11">
             </div>
             <div class="form-group">
                 <label for="WANDefaultGW">WAN Default GW</label>
                 <input type="text" ng-model="WANDefaultGW" class="form-control" id="WANDefaultGW"
-                        >
+                       size="11">
             </div>
         </form>
         <form class="form-inline" ng-show="wan.addr=='pppoe'">
             <div class="form-group">
                 <label for="PPPoEUsername">PPPoE Username</label>
                 <input type="text" ng-model="PPPoEUsername" class="form-control" id="PPPoEUsername"
-                        >
+                       size="10">
             </div>
             <div class="form-group">
                 <label for="PPPoEPassword">PPPoE Password</label>
                 <input type="text" ng-model="PPPoEPassword" class="form-control" id="PPPoEPassword"
-                        >
+                       size="10">
             </div>
         </form>
         <form class="form-inline">
             <div class="form-group">
                 <label for="iSSID">Internal SSID</label>
-                <input type="text" ng-model="InternalSSID" class="form-control" id="iSSID">
+                <input type="text" ng-model="InternalSSID" class="form-control" id="iSSID" size="10">
             </div>
             <div class="form-group">
                 <label for="iPW">Internal PW</label>
-                <input type="text" ng-model="InternalPW" class="form-control" id="iPW">
+                <input type="text" ng-model="InternalPW" class="form-control" id="iPW" size="10">
                 <button ng-click='getpass()'>^</button>
             </div>
         </form>
         <br>
-        <form class="form-inline">
-            <div class="form-group">
-                <label for="ssid">Guest Wireless</label>
-                <select name=ssid" ng-model="ssid.guest" id="ssid">
-                    <option value=1>YES</option>
-                    <option value=0>NO</option>
-                </select>
-            </div>
-        </form>
-        <form class="form-inline" ng-show="ssid.guest==1">
-            <div class="form-group">
-                <label for="gSSID">SSID</label>
-                <input type="text" ng-model="GuestSSID" class="form-control" id="gSSID">
-            </div>
-            <div class="form-group">
-                <label for="gPW">PW</label>
-                <input type="text" ng-model="GuestPW" class="form-control" id="gPW">
-            </div>
-        </form>
-        <p><textarea class="form-control" type="text" id="textarea" cols="60" rows="20">
+        <!--div class="row"-->
+            <form class="form-inline">
+                <div class="form-group">
+                    <label for="ssid">Guest Wireless</label>
+                    <select name=ssid" ng-model="ssid.guest" id="ssid">
+                        <option selected value=1>YES</option>
+                        <option value=0>NO</option>
+                    </select>
+                </div>
+            </form>
+            <form class="form-inline" ng-show="ssid.guest==1">
+                <div class="form-group">
+                    <label for="gSSID">SSID</label>
+                    <input type="text" ng-model="GuestSSID" class="form-control" id="gSSID" size="10">
+                </div>
+                <div class="form-group">
+                    <label for="gPW">PW</label>
+                    <input type="text" ng-model="GuestPW" class="form-control" id="gPW" size="10">
+                </div>
+            </form>
+        <!--/div-->
 
-#Script created for use with office: {{hostname}}
-#Configuration Script
-
-#Hostname
-set hostname {{hostname}}
-
-#WAN Settings (DHCP WAN type dhcp)
-add internet-connection interface WAN type dhcp conn-test-timeout 5
-#WAN Settings (Static WAN ipv4-address)
-set interface WAN ipv4-address {{StaticWANIP}} subnet-mask {{WANSubnet}} default-gw {{WANDefaultGW}}
-#WAN Settings (PPPoE WAN type pppoe)
-add internet-connection interface WAN type pppoe username {{PPPoEUsername}} password {{PPPoEPassword}} conn-test-timeout 5
-
-#Local Area Network
-set dhcp server interface LAN1_Switch disable
-set interface LAN1_Switch ipv4-address {{subnet}}1 mask-length 24
-set dhcp server interface LAN1_Switch include-ip-pool {{subnet}}1-{{subnet}}255
-set dhcp server interface LAN1_Switch enable
-set interface LAN1_Switch state on
-set dhcp server interface LAN1_Switch dns primary 10.29.21.215
-set dhcp server interface LAN1_Switch dns secondary 10.110.21.215
-
-#WLAN (Password must be 8-64 characters)
-set wlan ssid {{InternalSSID}}
-set wlan radio country united-states operation-mode 11ng channel auto channel-width auto transmitter-power full
-set wlan vap {{InternalSSID}} security-type WPA/WPA2
-set wlan vap {{InternalSSID}} wpa-encryption-type Auto
-set wlan vap {{InternalSSID}} wpa-auth-type password {{InternalPW}} hotspot off
-set wlan advanced-settings hide-ssid on
-set wlan assignment LAN1Sw
-set wlan vap {{InternalSSID}} enable
-set wlan enable
-
-#Guest Wireless (Password must be 8-64 characters)
-add wlan vap ssid {{GuestSSID}}
-set wlan vap {{GuestSSID}} security-type WPA/WPA2
-set wlan vap {{GuestSSID}} wpa-encryption-type Auto
-set wlan vap {{GuestSSID}} wpa-auth-type password {{GuestPW}} hotspot off
-set wlan vap {{GuestSSID}} enable
-set dhcp server interface {{GuestSSID}} dns primary 4.2.2.2
-set dhcp server interface {{GuestSSID}} dns secondary 4.2.2.1
-
-#End Configuration
-
-    </textarea></p>
-
+        <div class="config1100" ng-include="'data/config1100.html'"></div>
         <p>
-            <button ng-click="save()">Save</button> Right-Click to 'SaveAs'
+            <button type="button" class="btn btn-default btn-lg" ng-click="save()">Save</button>
         </p>
     </div>
     <!-- In production use:

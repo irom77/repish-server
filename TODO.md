@@ -1,5 +1,7 @@
+ng-options for ssid.gues
 ----------------------------------------------------------------
-Passwd.me api
+Passwd.me api in server.js
+CORS not opened to public
 ----------------------------------------------------------------
 tooltip, helper for naming convention
 ----------------------------------------------------------------

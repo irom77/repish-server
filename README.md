@@ -10,8 +10,6 @@
  **http://wwww:3001/**
  
 ### NOTICE:
- 1100 template is included in index.ejs: 
+[template config is included in index.ejs:](http://www:3001/data/config1100.html)
+ <div class="config1100" ng-include="'data/config1100.html'"></div>
  
- <textarea class="form-control" type="text" id="textarea" cols="60" rows="20">
- ...
- </textarea>
