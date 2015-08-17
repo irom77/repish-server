@@ -5,14 +5,15 @@
 var exec = require('ssh-exec');
 var config = require('./../configure/config');
 
-RoboName = process.argv[2] //'Irek_Test_1100';
+RoboName = process.argv[2]; //'Irek_Test_1100';
 command = config.envCMA + config.resetSic + RoboName + config.ActivationKey+ ';' + config.lscertSIC + RoboName + ';';
 host = config.user_host;
 //console.log(command + '\n' + host);
-
+if (!RoboName) {
+    console.log('RoboName is empty');
+    process.exit();
+}
 //exec(command, host).pipe(process.stdout);
-
-
 var buffers = [];
 
 var reset = function (command) {
@@ -24,7 +25,6 @@ var reset = function (command) {
     stream.on('end', function () {
         var buffer = Buffer.concat(buffers);
         console.log(buffer.toString());
-        //process.exit();
         process.stdin.end();
     });
 };
