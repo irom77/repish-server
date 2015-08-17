@@ -12,7 +12,7 @@ console.log(command + '\n' + host);
 
 exec(command, 'user_host').pipe(process.stdout);
 
-/*
+/*to be tested
 var buffers = [];
 
 var reset = function (command) {
