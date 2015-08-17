@@ -3,7 +3,7 @@
  */
 
 var exec = require('ssh-exec');
-var config = require('./../config/config');
+var config = require('./../configure/config');
 
 RoboName = 'Irek_Test_1100';
 command = config.envCMA + config.resetSic + RoboName + config.ActivationKey+ ';' + config.lscertSIC + RoboName + ';';

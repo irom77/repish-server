@@ -1,8 +1,8 @@
 # Created by .ignore support plugin (hsz.mobi)
 ### Example user template template
 ### Example user template
-config/config.js
-config/test
+configure/config.js
+configure/test
 # IntelliJ project files
 .idea
 *.iml
@@ -16,7 +16,7 @@ logs/*
 node_modules/
 /public/bower_components/
 /public/data/
-/config/
+/configure/
 tmp
 .DS_Store
 
