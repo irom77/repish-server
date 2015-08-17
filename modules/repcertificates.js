@@ -11,7 +11,7 @@ host = config.user_host;
 console.log(command + '\n' + host);
 
 exec(command, 'user_host').pipe(process.stdout);
-//
+
 /*
 var buffers = [];
 
