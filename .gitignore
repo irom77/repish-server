@@ -15,6 +15,7 @@ logs/*
 node_modules/
 /public/bower_components/
 /public/data/
+/config/
 tmp
 .DS_Store
 
