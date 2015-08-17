@@ -1,7 +1,8 @@
 # Created by .ignore support plugin (hsz.mobi)
 ### Example user template template
 ### Example user template
-
+config/config.js
+config/test
 # IntelliJ project files
 .idea
 *.iml
@@ -22,5 +23,3 @@ tmp
 
 
 
-config/config.js
-config/test
