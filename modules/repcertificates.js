@@ -10,9 +10,9 @@ command = config.envCMA + config.resetSic + RoboName + config.ActivationKey+ ';'
 host = config.user_host;
 console.log(command + '\n' + host);
 
-exec(command, host).pipe(process.stdout);
+//exec(command, host).pipe(process.stdout);
 
-/*
+
 var buffers = [];
 
 var reset = function (command) {
@@ -28,4 +28,5 @@ var reset = function (command) {
         // process.stdin.end();
     });
 };
-*/
+
+reset();
