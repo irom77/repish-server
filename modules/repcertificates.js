@@ -29,4 +29,4 @@ var reset = function (command) {
     });
 };
 
-reset();
+//reset();
