@@ -25,7 +25,7 @@ var reset = function (command) {
         var buffer = Buffer.concat(buffers);
         console.log(buffer.toString());
         //process.exit();
-        // process.stdin.end();
+        process.stdin.end();
     });
 };
 
