@@ -12,8 +12,9 @@ console.log(command + '\n' + host);
 
 exec(command, 'user_host').pipe(process.stdout);
 
-var buffers = [];
 /*
+var buffers = [];
+
 var reset = function (command) {
     stream = process.stdin
         .pipe(exec(command, host));
