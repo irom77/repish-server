@@ -10,8 +10,12 @@ var app = angular.module("angularApp", [])
     .controller("myConfigGenCtrl", function ($scope, $http, passwdMe) {
         $scope.wan = {addr: 'dhcp'};
         $scope.ssid = {guest: 1};
+        $scope.hostname = '';//ADVOCOSUMMITWE198-60
         $scope.subnet = '';
-        $scope.InternalPW = '';
+        $scope.InternalPW = '1nt3rn@l**';
+        $scope.GuestPW = 'Gu3$t**';
+        $scope.GuestSSID = 'Guest';
+        $scope.InternalSSID = 'Internal';
         $scope.countsave = 0;
         $scope.save = function (data, filename) {
             data = $("#textarea").val();
@@ -26,11 +30,18 @@ var app = angular.module("angularApp", [])
             saveAs(blob, filename);
             $scope.countsave++
         };
-        $scope.getpass = function () {
+        $scope.getpass = function () { //unused
             passwdMe.getData().success(function (response) {
                 console.log(response);
                 $scope.InternalPW = response;
             })
+        };
+        $scope.addprefix = function () { //unused
+            if ($scope.hostname) {
+                $scope.InternalPW = '1nt3rn@l**';
+                var match = /(?:\S){6}([^\d]*)/.exec($scope.hostname); //match char 6+ until first digit
+                $scope.InternalPW = match[1] + $scope.InternalPW;
+            }
         };
     })
     .service('passwdMe', function ($http) {
