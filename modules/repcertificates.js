@@ -3,20 +3,22 @@
  */
 module.exports = function (RoboName) {
 
+    //return('TESTrep');
     var exec = require('ssh-exec');
     var config = require('./../configure/config');
 
     //RoboName = process.argv[2]; //'Irek_Test_1100';
     command = config.envCMA + config.resetSic + RoboName + config.ActivationKey + ';' + config.lscertSIC + RoboName + ';';
     host = config.user_host;
-//console.log(command + '\n' + host);
+    console.log(command + '\n' + host);
     if (!RoboName) {
         console.log('RoboName is empty');
         //process.exit();
     }
-//exec(command, host).pipe(process.stdout);
+    output = exec(command, host).pipe(process.stdout);
+    return('OK');
+    /*
     var buffers = [];
-
     var reset = function (command) {
         stream = process.stdin
             .pipe(exec(command, host));
@@ -32,5 +34,6 @@ module.exports = function (RoboName) {
     };
 
     reset(command);
+    */
 
 };
