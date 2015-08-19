@@ -12,13 +12,13 @@ router.get('/api/manage', function(req, res,next) {
   //res.json({name: 'foo'});
   //console.log(repcertificates('Irek_Test_1100'));
   data = repcertificates('Irek_Test_1100');
-  response.writeHead(200, {
+  res.writeHead(200, {
     'Content-Type': 'application/text',
     'Content-Length': data.length,
     'Access-Control-Allow-Origin': '*'
   });
-  response.write(data);
-  response.end();
+  res.write(data);
+  res.end();
 });
 
 module.exports = router;
