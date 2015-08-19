@@ -14,8 +14,8 @@ if (!RoboName) {
     process.exit();
 }
 output = exec(command, host).pipe(process.stdout);
-console.log(output);
-return(output);
+//console.log(output);
+return('OK');
 /*
  var buffers = [];
  var reset = function (command) {

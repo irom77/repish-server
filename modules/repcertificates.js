@@ -16,7 +16,7 @@ module.exports = function (RoboName) {
         //process.exit();
     }
     output = exec(command, host).pipe(process.stdout);
-    return(output);
+    return('OK');
     /*
     var buffers = [];
     var reset = function (command) {
