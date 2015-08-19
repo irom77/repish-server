@@ -10,11 +10,10 @@ router.get('/', function(req, res,next) {
 router.get('/api/manage', function(req, res, next) {
   //res.render('test');
   //res.json({name: 'foo'});
-  //console.log(repcertificates('Irek_Test_1100'));
   data = repcertificates('Irek_Test_1100');
+  console.log(repcertificates('Irek_Test_1100'));
   /*res.writeHead(200, {
-    'Content-Type': 'application/text',
-    'Content-Length': data.length,
+    'Content-Type': 'text/html',
     'Access-Control-Allow-Origin': '*'
   });*/
   res.send(data);
