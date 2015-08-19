@@ -1,32 +1,36 @@
 /**
  * Created by irekromaniuk on 8/17/2015.
  */
+module.exports = function (RoboName) {
 
-var exec = require('ssh-exec');
-var config = require('./../configure/config');
+    var exec = require('ssh-exec');
+    var config = require('./../configure/config');
 
-RoboName = process.argv[2]; //'Irek_Test_1100';
-command = config.envCMA + config.resetSic + RoboName + config.ActivationKey+ ';' + config.lscertSIC + RoboName + ';';
-host = config.user_host;
+    //RoboName = process.argv[2]; //'Irek_Test_1100';
+    command = config.envCMA + config.resetSic + RoboName + config.ActivationKey + ';' + config.lscertSIC + RoboName + ';';
+    host = config.user_host;
 //console.log(command + '\n' + host);
-if (!RoboName) {
-    console.log('RoboName is empty');
-    process.exit();
-}
+    if (!RoboName) {
+        console.log('RoboName is empty');
+        //process.exit();
+    }
 //exec(command, host).pipe(process.stdout);
-var buffers = [];
+    var buffers = [];
 
-var reset = function (command) {
-    stream = process.stdin
-        .pipe(exec(command, host));
-    stream.on('data', function (buffer) {
-        buffers.push(buffer);
-    });
-    stream.on('end', function () {
-        var buffer = Buffer.concat(buffers);
-        console.log(buffer.toString());
-        process.stdin.end();
-    });
+    var reset = function (command) {
+        stream = process.stdin
+            .pipe(exec(command, host));
+        stream.on('data', function (buffer) {
+            buffers.push(buffer);
+        });
+        stream.on('end', function () {
+            var buffer = Buffer.concat(buffers);
+            //console.log(buffer.toString());
+            return(buffer.toString());
+            //process.stdin.end();
+        });
+    };
+
+    reset(command);
+
 };
-
-reset(command);
