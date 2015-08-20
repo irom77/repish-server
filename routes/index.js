@@ -10,7 +10,7 @@ router.get('/', function(req, res,next) {
 router.get('/api/manage', function(req, res, next) {
   //res.render('test');
   //res.json({name: 'foo'});
-  //data = repcertificates('Irek_Test_2_1100');//TESTED SUCCESS
+  data = repcertificates(req.RoboName);//TESTED SUCCESS
   //data = 'TESTing';
   //console.log(repcertificates('Irek_Test_1100'));
   /*res.writeHead(200, {
