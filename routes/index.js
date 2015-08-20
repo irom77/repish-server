@@ -7,7 +7,7 @@ router.post('/', function(req, res,next) {
   res.render('index');
 });
 
-router.get('/api/manage', function(req, res, next) {
+router.post('/api/manage', function(req, res, next) {
   //res.render('test');
 
   //res.json({name: 'foo'});
