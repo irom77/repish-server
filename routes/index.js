@@ -17,7 +17,7 @@ router.post('/api/manage', function(req, res, next) {
     'Content-Type': 'text/html',
     'Access-Control-Allow-Origin': '*'
   });*/
-  res.send(data,req.RoboName);
+  res.send(data);
   //verify with 'cpca_client lscert -kind SIC -stat Pending | grep -A 2 RoboName'
 });
 
