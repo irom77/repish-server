@@ -9,16 +9,16 @@ router.post('/', function(req, res,next) {
 
 router.post('/api/manage', function(req, res, next) {
   //res.render('test');
-
   //res.json({name: 'foo'});
-  data = repcertificates(req.RoboName);//TESTED SUCCESS
+  data = repcertificates('Irek_Test_1100');//TESTED SUCCESS
   //data = 'TESTing';
   //console.log(repcertificates('Irek_Test_1100'));
   /*res.writeHead(200, {
     'Content-Type': 'text/html',
     'Access-Control-Allow-Origin': '*'
   });*/
-  res.send(data);
+  res.send(data,req.RoboName);
+  //verify with 'cpca_client lscert -kind SIC -stat Pending | grep -A 2 RoboName'
 });
 
 module.exports = router;
