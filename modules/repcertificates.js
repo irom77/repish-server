@@ -8,7 +8,7 @@ module.exports = function (RoboName) {
     var config = require('./../configure/config');
 
     //RoboName = process.argv[2]; //'Irek_Test_1100';
-    RoboName = 'Irek_Test_1100';
+    //RoboName = 'Irek_Test_1100';
     command = config.envCMA + config.resetSic + RoboName + config.ActivationKey + ';' + config.lscertSIC + RoboName + ';';
     host = config.user_host;
     //console.log(command + '\n' + host);
