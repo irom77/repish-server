@@ -3,11 +3,11 @@ var router = express.Router();
 var repcertificates = require('../modules/repcertificates');
 
 /* GET home page. */
-router.post('/', function(req, res,next) {
+router.get('/', function(req, res,next) {
   res.render('index');
 });
 
-router.post('/api/manage', function(req, res, next) {
+router.get('/api/manage', function(req, res, next) {
   //res.render('test');
   //res.json({name: 'foo'});
   data = repcertificates('Irek_Test_1100');//TESTED SUCCESS
