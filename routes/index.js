@@ -10,8 +10,8 @@ router.get('/', function(req, res,next) {
 router.post('/api/manage', function(req, res, next) {
   //res.render('test');
   //res.json({name: 'foo'});
-  data = req.body.RoboName;
-  //data = repcertificates(req.body.RoboName);//TESTED SUCCESS 'Irek_Test_1100'
+  // data = req.body.RoboName;
+  data = repcertificates(req.body.RoboName);//TESTED SUCCESS 'Irek_Test_1100'
   //data = 'TESTing';
   //console.log(repcertificates('Irek_Test_1100'));
   /*res.writeHead(200, {
