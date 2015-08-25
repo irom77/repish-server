@@ -13,12 +13,6 @@ router.post('/api/manage', function(req, res, next) {
   // data = req.body.RoboName;
 //data = repcertificates(req.body.RoboName);//TESTED SUCCESS 'Irek_Test_1100', API_Test_1100
   data = "Under Development";
-  //data = 'TESTing';
-  //console.log(repcertificates('Irek_Test_1100'));
-  /*res.writeHead(200, {
-    'Content-Type': 'text/html',
-    'Access-Control-Allow-Origin': '*'
-  });*/
   res.send(data);
   //verify with 'cpca_client lscert -kind SIC -stat Pending | grep -A 2 RoboName'
 });

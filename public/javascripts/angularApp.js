@@ -1,22 +1,19 @@
 /**
  * Created by irekromaniuk on 8/10/2015.
  */
-var app = angular.module("angularApp", [])
+var app = angular.module("angularApp", ['mgcrea.ngStrap'])
     .config(['$httpProvider', function($httpProvider) {
         $httpProvider.defaults.useXDomain = true;
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
     }
     ])
     .controller("myConfigGenCtrl", function ($scope, $http, passwdMe) {
-        $scope.wan = {addr: 'dhcp'};
+        //$scope.wan = {addr: 'dhcp'}; //initialized in html
         $scope.ssid = {guest: 1};
-        $scope.hostname = '';//ADVOCOSUMMITWE198-60
+        $scope.hostname = '';
         $scope.subnet = '';
-        $scope.InternalPW = '1nt3rn@l**';
-        $scope.GuestPW = 'Gu3$t**';
-        $scope.GuestSSID = 'Guest';
-        $scope.InternalSSID = 'Internal';
-        $scope.countsave = 0;
+        //InternalSSID/InternalPW and GuestSSID/GuestPW to be initialised
+        //$scope.countsave = 0; // not used
         $scope.save = function (data, filename) {
             data = $("#textarea").val();
             if ($scope.wan.addr != 'static') data = data.replace(/.*WAN ipv4-address.*/g, '');
@@ -29,6 +26,15 @@ var app = angular.module("angularApp", [])
             filename = "autoconf.clish";
             saveAs(blob, filename);
             $scope.countsave++
+        };
+        $scope.popover = {
+            title: 'Hostname Naming Convention',
+            content: 'TYPE OF OFFICE (3 Char): ADV or CFN ' +
+            'LOCATION (1 Char): O=Office, V=Vacation, P=Partner, H=Home ' +
+            'STATE (2 Char): ' +
+            'OFFICE NAME (8 Char MAX) ' +
+            'LAST TWO OCTETs OF SUBNET  (6 Digits - fill the open numbers of the 2nd and 3rd octets with 0s)' +
+                ' i.e. ADVOMAKEVTESTE192007 (not ADVOMAKEVTESTE192-7)'
         };
         $scope.getpass = function () { //unused
             passwdMe.getData().success(function (response) {
@@ -44,7 +50,7 @@ var app = angular.module("angularApp", [])
             }
         };
     })
-    .service('passwdMe', function ($http) {
+    .service('passwdMe', function ($http) { //unused
     this.getData = function () {
         return $http.get('https://passwd.me/api/1.0/get_password.txt?type=random&length=6&charset=LOWERCASEALPHANUMERIC');
     }
