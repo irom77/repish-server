@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var repcertificates = require('../modules/repcertificates');
+//var repcertificates = require('../modules/repcertificates');
 
 /* GET home page. */
 router.get('/', function(req, res,next) {
