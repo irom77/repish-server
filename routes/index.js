@@ -14,13 +14,13 @@ router.post('/api/cli', function(req, res, next) {
   //res.json({name: 'foo'});
   // data = req.body.RoboName;
 //data = repcertificates(req.body.RoboName);//TESTED SUCCESS 'Irek_Test_1100', API_Test_1100
-  data = "Under Development";
+  data = "Under Development\n";
   res.send(data);
   //verify with 'cpca_client lscert -kind SIC -stat Pending | grep -A 2 RoboName'
 });
 
 router.post('/api/counter', function(req, res, next) {
-    client.set('save',1);
+    //client.set('save',1);
     client.incr('save', function(err, reply) {
       console.log(reply);
       res.send(reply);
