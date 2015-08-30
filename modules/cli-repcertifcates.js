@@ -15,7 +15,7 @@ if (!RoboName) {
 }
 output = exec(command, host).pipe(process.stdout);
 //console.log(output);
-return('OK');
+return(output);
 /*
  var buffers = [];
  var reset = function (command) {
@@ -32,4 +32,4 @@ return('OK');
  });
  };
 */
- reset(command);
+ // reset(command);

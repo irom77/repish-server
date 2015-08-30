@@ -36,22 +36,4 @@ var app = angular.module("angularApp", ['mgcrea.ngStrap'])
             'LAST TWO OCTETs OF SUBNET  (6 Digits - fill the open numbers of the 2nd and 3rd octets with 0s)' +
                 ' i.e. ADVOMAKEVTESTE192007 (not ADVOMAKEVTESTE192-7)'
         };
-        $scope.getpass = function () { //unused
-            passwdMe.getData().success(function (response) {
-                console.log(response);
-                $scope.InternalPW = response;
-            })
-        };
-        $scope.addprefix = function () { //unused
-            if ($scope.hostname) {
-                $scope.InternalPW = '1nt3rn@l**';
-                var match = /(?:\S){6}([^\d]*)/.exec($scope.hostname); //match char 6+ until first digit
-                $scope.InternalPW = match[1] + $scope.InternalPW;
-            }
-        };
-    })
-    .service('passwdMe', function ($http) { //unused
-    this.getData = function () {
-        return $http.get('https://passwd.me/api/1.0/get_password.txt?type=random&length=6&charset=LOWERCASEALPHANUMERIC');
-    }
-});
+    });
