@@ -7,7 +7,7 @@ var app = angular.module("angularApp", ['mgcrea.ngStrap'])
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
     }
     ])
-    .controller("myConfigGenCtrl", function ($scope, $http, passwdMe) {
+    .controller("myConfigGenCtrl", function ($scope) {
         //$scope.wan = {addr: 'dhcp'}; //initialized in html
         $scope.ssid = {guest: 1};
         $scope.hostname = '';
