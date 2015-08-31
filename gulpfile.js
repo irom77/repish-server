@@ -5,6 +5,7 @@ var gulp = require('gulp');
 var fileinclude = require('gulp-file-include');
 var preprocess = require('gulp-preprocess');
 var rename = require("gulp-rename");
+var run = require('gulp-run');
 
 gulp.task('index-prod', function() {
     gulp.src('./views/index-template.ejs')
