@@ -43,7 +43,7 @@ var app = angular.module("angularApp", ['mgcrea.ngStrap'])
     })
 .service('counting', function ($http) {
         this.incCounter = function (name) {
-            return $http.put('http://repish:3001/api/counter/'+ name);
+            return $http.post('http://repish:3001/api/counter/'+ name);
         };
         this.getCounter = function (name) {
             return $http.get('http://repish:3001/api/counter/'+ name);
