@@ -41,11 +41,11 @@ var app = angular.module("angularApp", ['mgcrea.ngStrap'])
             })
         };
     })
-.service('counting', function ($http, counter) {
-        this.incCounter = function (counter) {
-            return $http.put('http://repish:3001/api/counter/'+ counter);
+.service('counting', function ($http,name) {
+        this.incCounter = function (name) {
+            return $http.put('http://repish:3001/api/counter/'+ name);
         };
-        this.getCounter = function (counter) {
-            return $http.get('http://repish:3001/api/counter/'+ counter);
+        this.getCounter = function (name) {
+            return $http.get('http://repish:3001/api/counter/'+ name);
         }
     });
