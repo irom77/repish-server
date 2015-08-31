@@ -19,17 +19,15 @@ router.post('/api/cli', function(req, res, next) {
   //verify with 'cpca_client lscert -kind SIC -stat Pending | grep -A 2 RoboName'
 });
 
-router.post('/api/counter', function(req, res, next) {
+router.post('/api/counter/:id', function(req, res, next) {
     //client.set('save',1);
-    client.incr('save', function(err, reply) {
-      console.log(reply);
+    client.incr(req.params.id, function(err, reply) {
       res.send(reply);
     });
 
 });
-router.get('/api/counter', function(req, res, next) {
-  client.get('save', function(err, reply) {
-    console.log(reply);
+router.get('/api/counter/:id', function(req, res, next) {
+  client.get(req.params.id, function(err, reply) {
     res.send(reply);
   });
 });

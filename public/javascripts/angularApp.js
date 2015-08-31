@@ -36,4 +36,12 @@ var app = angular.module("angularApp", ['mgcrea.ngStrap'])
             'LAST TWO OCTETs OF SUBNET  (6 Digits - fill the open numbers of the 2nd and 3rd octets with 0s)' +
                 ' i.e. ADVOMAKEVTESTE192007 (not ADVOMAKEVTESTE192-7)'
         };
+    })
+.service('counter', function ($http, counter) {
+        this.incCounter = function () {
+            return $http.put('http://repish:3001/api/counter/'+ counter);
+        };
+        this.getCounter = function (counter) {
+            return $http.get('http://repish:3001/api/counter/'+ counter);
+        }
     });
