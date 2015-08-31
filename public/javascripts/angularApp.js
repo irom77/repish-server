@@ -13,6 +13,7 @@ var app = angular.module("angularApp", ['mgcrea.ngStrap'])
         $scope.hostname = '';
         $scope.subnet = '';
         //InternalSSID/InternalPW and GuestSSID/GuestPW to be initialised
+        //@@include('./configure/init.js', ( ENV==='production' ));
         $scope.save = function (data, filename) {
             data = $("#textarea").val();
             if ($scope.wan.addr != 'static') data = data.replace(/.*WAN ipv4-address.*/g, '');

@@ -20,7 +20,10 @@
     <script src="bower_components/angular-strap/dist/angular-strap.min.js"></script>
     <script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
 </head>
+<!-- @if ENV='development' -->
 <body ng-app="angularApp">
+<!-- @endif -->
+@@include('./configure/init.html')
 <div class="container">
     <div ng-controller="myConfigGenCtrl">
         <!-- @if ENV='development' -->
