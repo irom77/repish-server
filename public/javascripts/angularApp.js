@@ -7,13 +7,12 @@ var app = angular.module("angularApp", ['mgcrea.ngStrap'])
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
     }
     ])
-    .controller("myConfigGenCtrl", function ($scope) {
+    .controller("myConfigGenCtrl", function ($scope, $http, counter) {
         //$scope.wan = {addr: 'dhcp'}; //initialized in html
         $scope.ssid = {guest: 1};
         $scope.hostname = '';
         $scope.subnet = '';
         //InternalSSID/InternalPW and GuestSSID/GuestPW to be initialised
-        //$scope.countsave = 0; // not used
         $scope.save = function (data, filename) {
             data = $("#textarea").val();
             if ($scope.wan.addr != 'static') data = data.replace(/.*WAN ipv4-address.*/g, '');
@@ -25,7 +24,7 @@ var app = angular.module("angularApp", ['mgcrea.ngStrap'])
             var blob = new Blob([data], {type: "text/plain;charset=utf-8"});
             filename = "autoconf.clish";
             saveAs(blob, filename);
-            $scope.countsave++
+            $scope.Counter(save);
         };
         $scope.popover = {
             title: 'Hostname Naming Convention',
@@ -36,9 +35,14 @@ var app = angular.module("angularApp", ['mgcrea.ngStrap'])
             'LAST TWO OCTETs OF SUBNET  (6 Digits - fill the open numbers of the 2nd and 3rd octets with 0s)' +
                 ' i.e. ADVOMAKEVTESTE192007 (not ADVOMAKEVTESTE192-7)'
         };
+        $scope.Counter = function (name) {
+            counter.incCounter(name).success(function (response) {
+                console.log(response);
+            })
+        };
     })
 .service('counter', function ($http, counter) {
-        this.incCounter = function () {
+        this.incCounter = function (counter) {
             return $http.put('http://repish:3001/api/counter/'+ counter);
         };
         this.getCounter = function (counter) {
