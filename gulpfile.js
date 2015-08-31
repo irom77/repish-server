@@ -57,8 +57,8 @@ gulp.task('test-include', function() {
 });
 
 gulp.task('copy', function () {
-    //run('../copy-repish-server-PROD.sh').exec;
-    run('../test.sh').exec()
+    run('../copy-repish-server-PROD.sh').exec();
+    //run('../test.sh').exec()
 });
 
 gulp.task('dev', ['index-dev','www-dev']);
