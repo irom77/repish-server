@@ -24,7 +24,7 @@ var app = angular.module("angularApp", ['mgcrea.ngStrap'])
             var blob = new Blob([data], {type: "text/plain;charset=utf-8"});
             filename = "autoconf.clish";
             saveAs(blob, filename);
-            $scope.Counter(save);
+            $scope.Counter('save');
         };
         $scope.popover = {
             title: 'Hostname Naming Convention',
