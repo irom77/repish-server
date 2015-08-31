@@ -41,7 +41,7 @@ var app = angular.module("angularApp", ['mgcrea.ngStrap'])
             })
         };
     })
-.service('counting', function ($http,name) {
+.service('counting', function ($http) {
         this.incCounter = function (name) {
             return $http.put('http://repish:3001/api/counter/'+ name);
         };
