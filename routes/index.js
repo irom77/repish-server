@@ -4,6 +4,11 @@ var repcertificates = require('../modules/repcertificates');
 var redis = require("redis"),
     client = redis.createClient(); //port,host
 
+client.on('error', function(err) {
+    console.log("Error " + err);
+    client.end();
+});
+
 /* GET home page. */
 router.get('/', function(req, res,next) {
   res.render('index');

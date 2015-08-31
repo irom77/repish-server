@@ -2,7 +2,12 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- @if ENV='development' -->
     <title>REPISH DEV</title>
+    <!-- @endif -->
+    <!-- @if ENV='production' -->
+    <title>REPISH</title>
+    <!-- @endif -->
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
@@ -18,7 +23,12 @@
 <body ng-app="angularApp">
 <div class="container">
     <div ng-controller="myConfigGenCtrl">
+        <!-- @if ENV='development' -->
         <div class="page-header"><h4>(DEV) CheckPoint 1100 Appliance config generator</h4></div>
+        <!-- @endif -->
+        <!-- @if ENV='production' -->
+        <div class="page-header"><h4>CheckPoint 1100 Appliance config generator</h4></div>
+        <!-- @endif -->
         <form novalidate class="form-inline" name="myForm">
             <div class="form-group ng-init: wan.addr='dhcp'">
                 <label for="WAN">WAN</label>

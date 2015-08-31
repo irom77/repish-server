@@ -7,7 +7,7 @@ var app = angular.module("angularApp", ['mgcrea.ngStrap'])
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
     }
     ])
-    .controller("myConfigGenCtrl", function ($scope, $http, counting) {
+    .controller("myConfigGenCtrl", function ($scope, $http, CounterSvc) {
         //$scope.wan = {addr: 'dhcp'}; //initialized in html
         $scope.ssid = {guest: 1};
         $scope.hostname = '';
@@ -36,12 +36,12 @@ var app = angular.module("angularApp", ['mgcrea.ngStrap'])
                 ' i.e. ADVOMAKEVTESTE192007 (not ADVOMAKEVTESTE192-7)'
         };
         $scope.Counter = function (name) {
-            counting.incCounter(name).success(function (response) {
+            CounterSvc.incCounter(name).success(function (response) {
                 console.log(response);
             })
         };
     })
-.service('counting', function ($http) {
+.service('CounterSvc', function ($http) {
         this.incCounter = function (name) {
             return $http.post('http://repish:3001/api/counter/'+ name);
         };
