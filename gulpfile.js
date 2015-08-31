@@ -55,5 +55,10 @@ gulp.task('test-include', function() {
         .pipe(gulp.dest('./'));
 });
 
+gulp.task('copy', function () {
+    //run('../copy-repish-server-PROD.sh')
+    run('../test.sh')
+});
+
 gulp.task('dev', ['index-dev','www-dev']);
 gulp.task('prod', ['index-prod','www-prod']);
