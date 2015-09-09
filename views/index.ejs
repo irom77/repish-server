@@ -6,8 +6,9 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-    <!--script src="bower_components/bootstrap/dist/css/bootstrap.min.css"></script-->
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!--link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"-->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="stylesheets/style.css">
     <!--script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script-->
     <script src="bower_components/angular/angular.min.js"></script>
@@ -15,10 +16,11 @@
     <script src="bower_components/angular-strap/dist/angular-strap.min.js"></script>
     <script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
 </head>
-<body ng-app="angularApp">
+<body ng-app="angularApp" ng-controller="myConfigGenCtrl">
 <!-- init.html -->
+
 <div class="container">
-    <div ng-controller="myConfigGenCtrl">
+    <div class="row">
         <div class="page-header"><h4>(DEV) CheckPoint 1100 Appliance config generator</h4></div>
         <form novalidate class="form-inline" name="myForm">
             <div class="form-group ng-init: wan.addr='dhcp'">
@@ -39,6 +41,7 @@
                 <label for="subnet">Subnet</label>
                 <input type="text" ng-model="subnet" class="form-control" id="subnet" size="6"
                        required ng-pattern="/^(?:[0-9]{1,3}\.){3}$/">
+
                 <p class="help-block">i.e. 10.2.3. (3 bytes ending with dot)</p>
             </div>
         </form>
@@ -105,17 +108,19 @@
                 <input type="text" ng-model="GuestPW" class="form-control" id="gPW" size="10">
             </div>
         </form>
-
+    </div>
+    <div class="row">
         <div class="config1100" ng-include="'data/config1100.html'"></div>
         <p>
             <button type="button" class="btn btn-default btn-lg" ng-click="save()">Save</button>
         </p>
     </div>
-    <script src="bower_components/file-saver.js/FileSaver.js"></script>
-    <script src="javascripts/angularApp.js"></script>
-    <!--script src="components/version/version.js"></script-->
-    <!--script src="components/version/version-directive.js"></script-->
-    <!--script src="components/version/interpolate-filter.js"></script-->
+</div>
+<script src="bower_components/file-saver.js/FileSaver.js"></script>
+<script src="javascripts/angularApp.js"></script>
+<!--script src="components/version/version.js"></script-->
+<!--script src="components/version/version-directive.js"></script-->
+<!--script src="components/version/interpolate-filter.js"></script-->
 </div>
 </body>
 </html>
