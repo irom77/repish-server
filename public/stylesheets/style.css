@@ -19,6 +19,7 @@ input.ng-invalid {
   border-radius: 15px;
 }
 
+.navbar { border-radius:0; }
 
 /*div {
   //margin: 10px 10px 10px 10px;

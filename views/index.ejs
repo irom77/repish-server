@@ -19,9 +19,15 @@
 <body ng-app="angularApp" ng-controller="myConfigGenCtrl">
 <!-- init.html -->
 
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">(DEV) CheckPoint 1100 Appliance config generator</a>
+        </div>
+    </div>
+</nav>
 <div class="container">
     <div class="row">
-        <div class="page-header"><h4>(DEV) CheckPoint 1100 Appliance config generator</h4></div>
         <form novalidate class="form-inline" name="myForm">
             <div class="form-group ng-init: wan.addr='dhcp'">
                 <label for="WAN">WAN</label>
