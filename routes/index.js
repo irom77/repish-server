@@ -29,6 +29,7 @@ router.post('/api/repcertifcates', function(req, res, next) {
 
 router.post('/api/updategateways', function(req, res, next) {
     var command = '/var/scripts/dev-UpdateGateways';
+    var command = 'ls -l';
     exec(command, config.user_host).pipe(res);
     //res.send("/api/updategateways\n");
 });
