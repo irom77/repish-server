@@ -32,6 +32,7 @@ router.post('/api/updategateways', function(req, res, next) {
     //var command = config.UpdateGateways + 'SD-REPVPN';
     exec(command, config.user_host).pipe(res);
     //res.send(command + '\n' + config.user_host);
+    //SD-REPVPN-02: 'Update CO' operation has finished successfully.
 });
 
 
