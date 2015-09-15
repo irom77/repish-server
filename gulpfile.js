@@ -1,6 +1,10 @@
 /**
  * Created by irekromaniuk on 8/31/2015.
+ * localhost:git push; gulp dev
+ * repish-server:git pull; gulp copy
+ * repish-PROD:gulp prod
  */
+
 var gulp = require('gulp');
 var fileinclude = require('gulp-file-include');
 var preprocess = require('gulp-preprocess');

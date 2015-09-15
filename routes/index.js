@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var repcertificates = require('../modules/repcertificates');
+//var repcertificates = require('../modules/repcertificates');
+//var updategateways = require('../modules/updategateways');
+var exec = require('ssh-exec');
+var config = require('./../configure/config');
 var redis = require("redis"),
     client = redis.createClient(); //port,host
 
@@ -14,7 +17,7 @@ router.get('/', function(req, res,next) {
   res.render('index');
 });
 
-router.post('/api/cli', function(req, res, next) {
+router.post('/api/repcertifcates', function(req, res, next) {
   //res.render('test');
   //res.json({name: 'foo'});
   // data = req.body.RoboName;
@@ -23,6 +26,13 @@ router.post('/api/cli', function(req, res, next) {
   res.send(data);
   //verify with 'cpca_client lscert -kind SIC -stat Pending | grep -A 2 RoboName'
 });
+
+router.post('/api/updategateways', function(req, res, next) {
+    var command = '/var/scripts/dev-UpdateGateways';
+    exec(command, config.user_host).pipe(res);
+    //res.send("/api/updategateways\n");
+});
+
 
 router.post('/api/counter/:id', function(req, res, next) {
     //client.set('save',1);
