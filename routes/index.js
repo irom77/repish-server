@@ -29,9 +29,9 @@ router.post('/api/repcertifcates', function(req, res, next) {
 
 router.post('/api/updategateways', function(req, res, next) {
     var command = '/var/scripts/dev-UpdateGateways';
-    var command = config.UpdateGateways + 'SD-REPVPN';
-    //exec(command, config.user_host).pipe(res);
-    res.send(command + ' ' + config.user_host);
+    //var command = config.UpdateGateways + 'SD-REPVPN';
+    exec(command, config.user_host).pipe(res);
+    //res.send(command + '\n' + config.user_host);
 });
 
 
