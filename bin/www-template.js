@@ -8,28 +8,38 @@ var app = require('../server');
 var debug = require('debug')('repish-server:server');
 var http = require('http');
 
+var https = require('https');
+var fs = require('fs');
+var privateKey  = fs.readFileSync('./configure/server.key', 'utf8');
+var certificate = fs.readFileSync('./configure/server.crt', 'utf8');
+var credentials = {key: privateKey, cert: certificate};
+
 /**
  * Get port from environment and store in Express.
  */
 // @if ENV='production'
 var port = normalizePort(process.env.PORT || '3000');
+var httpsPort = normalizePort(process.env.httpsPORT || '8443');
 // @endif
 // @if ENV='development'
 var port = normalizePort(process.env.PORT || '3001');
+var httpsPort = normalizePort(process.env.httpsPORT || '3002');
 // @endif
-app.set('port', port);
+app.set('port', httpsPort);
 
 /**
  * Create HTTP server.
  */
 
 var server = http.createServer(app);
+var httpsServer = https.createServer(credentials, app);
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
 server.listen(port);
+httpsServer.listen(httpsPort,'0.0.0.0');
 server.on('error', onError);
 server.on('listening', onListening);
 
