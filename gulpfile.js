@@ -12,8 +12,8 @@ var rename = require("gulp-rename");
 var run = require('gulp-run');
 
 gulp.task('index-prod', function() {
-    gulp.src('./views/index-template.ejs')
-        .pipe(rename('./views/index.ejs'))
+    gulp.src('./views/index-template.html')
+        .pipe(rename('./views/index.html'))
         .pipe(preprocess({context: { ENV: 'production'}})) //To set environment variables in-line
         .pipe(fileinclude({
             prefix: '@@',
@@ -23,8 +23,8 @@ gulp.task('index-prod', function() {
 });
 
 gulp.task('index-dev', function() {
-    gulp.src('./views/index-template.ejs')
-        .pipe(rename('./views/index.ejs'))
+    gulp.src('./views/index-template.html')
+        .pipe(rename('./views/index.html'))
         .pipe(preprocess({context: { ENV: 'development'}})) //To set environment variables in-line
         .pipe(fileinclude({
             prefix: '@@',

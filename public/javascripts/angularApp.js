@@ -44,9 +44,9 @@ var app = angular.module("angularApp", ['mgcrea.ngStrap'])
     })
 .service('CounterSvc', function ($http) {
         this.incCounter = function (name) {
-            return $http.post('http://repish:3001/api/counter/'+ name);
+            return $http.post('https://repish:3443/api/counter/'+ name);
         };
         this.getCounter = function (name) {
-            return $http.get('http://repish:3001/api/counter/'+ name);
+            return $http.get('https://repish:3443/api/counter/'+ name);
         }
     });

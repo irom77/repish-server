@@ -1,5 +1,7 @@
 var express = require('express');
+var app = express();
 var router = express.Router();
+var path = require('path');
 //var repcertificates = require('../modules/repcertificates');
 //var updategateways = require('../modules/updategateways');
 var exec = require('ssh-exec');
@@ -14,7 +16,8 @@ client.on('error', function(err) {
 
 /* GET home page. */
 router.get('/', function(req, res,next) {
-  res.render('index');
+  //res.render('index');
+    res.sendFile(path.join(app.get('views') + '/index.html'));
 });
 
 router.post('/api/repcertifcates', function(req, res, next) {
