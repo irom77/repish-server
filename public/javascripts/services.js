@@ -63,6 +63,12 @@ angular.module('services', ['angular-jwt','ngResource'])
             }
         };
     })
-    .factory("updategatewaysSvc", function($resource) {
-        return $resource("/api/updategateways/:id");
+    .factory("apiSvc", function($http) {
+        return {
+            post: function(url) {
+                return $http.post(url).success(function(response) {
+                    return response
+                });
+            }
+        }
     });

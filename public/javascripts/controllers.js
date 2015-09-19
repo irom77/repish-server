@@ -52,16 +52,22 @@ angular.module('controllers', [])
             authSvc.logout();
         };
     })
-    .controller('managerCtrl', function ($scope, updategatewaysSvc) {
+    .controller('managerCtrl', function ($scope, apiSvc) {
         $scope.gateway = {
             SDREPVPN : true,
             WALREPVPN : true,
             MALREPVPN : true
         };
         $scope.updategateways = function () {
-            updategatewaysSvc.save($scope.gateway);
+            console.log($scope.gateway);
+            apiSvc.post('/api/updategateways/SD-REPVPN').success(function(response){
+                $scope.response = response;
+            })
+                .error(function(response){
+                    $scope.response = "NO RESPONSE";
+                }
+            );
         };
-
     })
     .controller('authCtrl', function ($scope, $window, authSvc, $state) {
         /*$scope.pageClass = function (path) {
