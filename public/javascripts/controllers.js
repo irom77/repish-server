@@ -62,7 +62,7 @@ angular.module('controllers', [])
             $scope.response = "";
             for (var gw in $scope.gateway) {
                 if ($scope.gateway[gw]) {
-                    console.log($scope.gateway[gw]);
+                    //console.log($scope.gateway[gw]);
                     apiSvc.post('/api/updategateways/' + $scope.gateway[gw]).success(function (response) {
                         $scope.response = response;
                     })

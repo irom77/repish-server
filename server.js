@@ -21,7 +21,7 @@ var routes = require('./routes/index');
 var app = express();
 var auth = expressJwt({secret: secret});
 //app.use('/api', auth );
-app.use('/', routes);
+app.use('/', auth, routes);
 //app.use('/users', users);
 
 // view engine setup
