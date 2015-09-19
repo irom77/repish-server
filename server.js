@@ -21,14 +21,8 @@ var routes = require('./routes/index');
 var app = express();
 var auth = expressJwt({secret: secret});
 //app.use('/api', auth );
-app.use('/api', auth, routes);
-//app.use('/users', users);
-
-/* GET home page. */
-app.get('/', function(req, res,next) {
-    //res.render('index');
-    res.sendFile(path.join(app.get('views') + '/index.html'));
-});
+//app.use('/api', routes);
+app.use('/', routes);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
