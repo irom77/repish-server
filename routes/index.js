@@ -14,12 +14,6 @@ client.on('error', function(err) {
     client.end();
 });
 
-/* GET home page. */
-router.get('/', function(req, res,next) {
-    //res.render('index');
-    res.sendFile(path.join(app.get('views') + '/index.html'));
-});
-
 router.post('/api/repcertifcates', function(req, res, next) {
   //res.render('test');
   //res.json({name: 'foo'});
