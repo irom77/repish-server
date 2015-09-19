@@ -14,12 +14,6 @@ client.on('error', function(err) {
     client.end();
 });
 
-/* GET home page. */
-router.get('/', function(req, res,next) {
-  //res.render('index');
-    res.sendFile(path.join(app.get('views') + '/index.html'));
-});
-
 router.post('/api/repcertifcates', function(req, res, next) {
   //res.render('test');
   //res.json({name: 'foo'});
@@ -33,7 +27,7 @@ router.post('/api/repcertifcates', function(req, res, next) {
 router.post('/api/updategateways/:id', function(req, res, next) {
     var command = '/var/scripts/repishUpdateGateways ' + req.params.id;
     console.log('---> ', command);
-    exec(command, config.user_host).pipe(res);
+    exec(command, config.user_host).pipe(res));
     //res.send(command + '\n' + config.user_host);
     //SD-REPVPN-02: 'Update CO' operation has finished successfully.
 });
