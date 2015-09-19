@@ -30,9 +30,9 @@ router.post('/api/repcertifcates', function(req, res, next) {
   //verify with 'cpca_client lscert -kind SIC -stat Pending | grep -A 2 RoboName'
 });
 
-router.post('/api/updategateways', function(req, res, next) {
-    var command = '/var/scripts/dev-UpdateGateways';
-    //var command = config.UpdateGateways + 'SD-REPVPN';
+router.post('/api/updategateways/:id', function(req, res, next) {
+    var command = '/var/scripts/repishUpdateGateways ' + req.params.id;
+    console.log('---> ', command);
     exec(command, config.user_host).pipe(res);
     //res.send(command + '\n' + config.user_host);
     //SD-REPVPN-02: 'Update CO' operation has finished successfully.

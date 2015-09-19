@@ -15,6 +15,9 @@
     "file-saver.js": "~1.20150507.2",
     "bootstrap": "~3.3.5",
     "angular-strap": "~2.3.1",
-    "angular-animate": "~1.4.4"
+    "angular-animate": "~1.4.4",
+    "angular-ui-router": "~0.2.15",
+    "angular-jwt": "~0.0.9",
+    "angular-resource": "~1.4.6"
   }
 }

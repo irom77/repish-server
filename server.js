@@ -19,8 +19,10 @@ var routes = require('./routes/index');
 //var users = require('./routes/users');
 
 var app = express();
-
-app.use('/api', expressJwt({secret: secret}));
+var auth = expressJwt({secret: secret});
+//app.use('/api', auth );
+app.use('/', routes);
+//app.use('/users', users);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -58,6 +60,7 @@ passport.use(new LocalStrategy(
         if (!username.match(/@/)) username = username.concat(config.domain);
         ad.authenticate(username, password, function (err, isAuthenticated) {
             if (err) return done(err, null);
+            console.log('---> passport ad.authenticate says', isAuthenticated);
             if (isAuthenticated) {
                 if (config.user.indexOf(username.replace(config.domain, '')) >= 0)
                     return done(null, {
@@ -100,17 +103,13 @@ app.post('/authenticate', function (req, res, next) {
                 group: user.group
             };
             //jwt.sign(payload, secretOrPrivateKey, options)
-            var token = jwt.sign(profile, secret, {expiresInMinutes: 2}); //60 in prod
+            var token = jwt.sign(profile, secret, {expiresInMinutes: 10}); //60 min in prod
             return res.json({token: token});
         } else {
             return res.status(401).json(info);
         }
     })(req, res, next);
 });
-
-
-app.use('/', routes);
-//app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

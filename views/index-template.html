@@ -17,124 +17,43 @@
     <link rel="stylesheet" href="stylesheets/style.css">
     <!--script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script-->
     <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.min.js"></script>
+    <script src="bower_components/angular-jwt/dist/angular-jwt.min.js"></script>
     <script src="bower_components/angular-animate/angular-animate.min.js"></script>
     <script src="bower_components/angular-strap/dist/angular-strap.min.js"></script>
     <script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
 </head>
 <!-- @if ENV='development' -->
-<body ng-app="angularApp" ng-controller="myConfigGenCtrl">
+<body ng-app="angularApp" ng-controller="appCtrl">
 <!-- @endif -->
 @@include('./configure/init.html')
 <nav class="navbar navbar-default" role="navigation">
     <div class="container">
         <div class="navbar-header">
             <!-- @if ENV='development' -->
-            <a class="navbar-brand" href="/">(DEV) CheckPoint 1100 Appliance config generator</a>
+            <a class="navbar-brand" href="/">(DEV)</a>
             <!-- @endif -->
-            <!-- @if ENV='production' -->
-            <a class="navbar-brand" href="/">CheckPoint 1100 Appliance config generator</a>
-            <!-- @endif -->
+        </div>
+        <div class="collapse navbar-collapse" id="nav-toggle">
+            <ul class="nav navbar-nav">
+                <li ng-class="pageClass('/config')"><a ui-sref="config">ROBO Config Generator</a></li>
+                <li ng-class="pageClass('/manage')"><a ui-sref="manage">Manage Gateways</a></li>
+            </ul>
+            <div ng-show="isAuthenticated" class="navbar-form navbar-right">
+                <span>{{welcome}}</span>
+                <button class="btn btn-primary" ng-click="logout()">Logout</button>
+            </div>
         </div>
     </div>
 </nav>
 <div class="container">
-    <div class="row">
-        <form novalidate class="form-inline" name="myForm">
-            <div class="form-group ng-init: wan.addr='dhcp'">
-                <label for="WAN">WAN</label>
-                <select name=wan" ng-model="wan.addr" id="WAN">
-                    <option value="dhcp">DHCP</option>
-                    <option value="static">STATIC</option>
-                    <option value="pppoe">PPPOE</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="hostname">Hostname</label>
-                <input type="text" ng-model="hostname" class="form-control" id="hostname" size="21"
-                       placeholder="ADVOILCHICAGOO199125">
-                <button class="btn btn-default btn-circle" bs-popover="popover">?</button>
-            </div>
-            <div class="form-group">
-                <label for="subnet">Subnet</label>
-                <input type="text" ng-model="subnet" class="form-control" id="subnet" size="6"
-                       required ng-pattern="/^(?:[0-9]{1,3}\.){3}$/">
-
-                <p class="help-block">i.e. 10.2.3. (3 bytes ending with dot)</p>
-            </div>
-        </form>
-        <form class="form-inline" ng-show="wan.addr=='static'">
-            <div class="form-group">
-                <label for="StaticWANIP">Static WAN IP</label>
-                <input type="text" ng-model="StaticWANIP" class="form-control" id="StaticWANIP"
-                       size="11">
-            </div>
-            <div class="form-group">
-                <label for="WANSubnet">WAN Subnet</label>
-                <input type="text" ng-model="WANSubnet" class="form-control" id="WANSubnet"
-                       size="11">
-            </div>
-            <div class="form-group">
-                <label for="WANDefaultGW">WAN Default GW</label>
-                <input type="text" ng-model="WANDefaultGW" class="form-control" id="WANDefaultGW"
-                       size="11">
-            </div>
-        </form>
-        <form class="form-inline" ng-show="wan.addr=='pppoe'">
-            <div class="form-group">
-                <label for="PPPoEUsername">PPPoE Username</label>
-                <input type="text" ng-model="PPPoEUsername" class="form-control" id="PPPoEUsername"
-                       size="10">
-            </div>
-            <div class="form-group">
-                <label for="PPPoEPassword">PPPoE Password</label>
-                <input type="text" ng-model="PPPoEPassword" class="form-control" id="PPPoEPassword"
-                       size="10">
-            </div>
-        </form>
-        <form class="form-inline">
-            <div class="form-group">
-                <label for="iSSID">Internal SSID</label>
-                <input type="text" ng-model="InternalSSID" class="form-control" id="iSSID" size="10">
-            </div>
-            <div class="form-group">
-                <label for="iPW">Internal PW</label>
-                <input type="text" ng-model="InternalPW" class="form-control" id="iPW" size="10">
-
-                <p class="help-block">Make SSIDs and PWs site specific (i.e. add prefix)</p>
-                <!--button ng-click="addprefix()">^</button-->
-            </div>
-        </form>
-        <br>
-
-        <form class="form-inline">
-            <div class="form-group">
-                <label for="ssid">Guest Wireless</label>
-                <select name=ssid" ng-model="ssid.guest" id="ssid">
-                    <option selected value=1>YES</option>
-                    <option value=0>NO</option>
-                </select>
-            </div>
-        </form>
-        <form class="form-inline" ng-show="ssid.guest==1">
-            <div class="form-group">
-                <label for="gSSID">SSID</label>
-                <input type="text" ng-model="GuestSSID" class="form-control" id="gSSID" size="10">
-            </div>
-            <div class="form-group">
-                <label for="gPW">PW</label>
-                <input type="text" ng-model="GuestPW" class="form-control" id="gPW" size="10">
-            </div>
-        </form>
-    </div>
-    <div class="row">
-        <div class="config1100" ng-include="'data/config1100.html'"></div>
-        <p>
-            <button type="button" class="btn btn-default btn-lg" ng-click="save()">Save</button>
-        </p>
-    </div>
+    <div ui-view></div>
 </div>
 <script src="bower_components/file-saver.js/FileSaver.js"></script>
 <script src="javascripts/angularApp.js"></script>
+<script src="javascripts/controllers.js"></script>
+<script src="javascripts/services.js"></script>
 <!--script src="components/version/version.js"></script-->
 <!--script src="components/version/version-directive.js"></script-->
 <!--script src="components/version/interpolate-filter.js"></script-->
