@@ -20,8 +20,8 @@ var routes = require('./routes/index');
 
 var app = express();
 var auth = expressJwt({secret: secret});
-app.use('/api', auth );
-//app.use('/', auth, routes);
+//app.use('/api', auth );
+app.use('/', auth, routes);
 //app.use('/users', users);
 
 /* GET home page. */
