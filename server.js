@@ -25,7 +25,7 @@ app.use('/', auth, routes);
 //app.use('/users', users);
 
 /* GET home page. */
-router.get('/', function(req, res,next) {
+app.get('/', function(req, res,next) {
     //res.render('index');
     res.sendFile(path.join(app.get('views') + '/index.html'));
 });
