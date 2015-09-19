@@ -59,17 +59,18 @@ angular.module('controllers', [])
             MALREPVPN: 'MAL-REPVPN'
         };
         for (var gw in $scope.gateway) {
-            //console.log($scope.gateway[gw]);
-            if ($scope.gateway[gw])
-            $scope.updategateways = function () {
-                apiSvc.post('/api/updategateways/'+$scope.gateway[gw]).success(function (response) {
-                    $scope.response = response;
-                })
-                    .error(function (response) {
-                        $scope.response = "NO RESPONSE";
-                    }
-                );
-            };
+            if ($scope.gateway[gw]) {
+                console.log($scope.gateway[gw]);
+                $scope.updategateways = function () {
+                    apiSvc.post('/api/updategateways/' + $scope.gateway[gw]).success(function (response) {
+                        $scope.response = response;
+                    })
+                        .error(function (response) {
+                            $scope.response = "NO RESPONSE";
+                        }
+                    );
+                };
+            }
         }
     })
     .controller('authCtrl', function ($scope, $window, authSvc, $state) {
