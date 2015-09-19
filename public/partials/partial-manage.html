@@ -1,9 +1,15 @@
 <div class="row">
     <form name="myForm">
         <button type="button" class="btn btn-primary" ng-click="updategateways()">Update CO Gateways</button>
-        <label class="checkbox-inline"><input type="checkbox" ng-model="gateway.SDREPVPN">SD-REPVPN</label>
-        <label class="checkbox-inline"><input type="checkbox" ng-model="gateway.WALREPVPN">WAL-REPVPN</label>
-        <label class="checkbox-inline"><input type="checkbox" ng-model="gateway.MALREPVPN">MAL-REPVPN</label>
+        <label class="checkbox-inline">
+            <input type="checkbox" ng-model="gateway.SDREPVPN"
+                   ng-true-value="'SD-REPVPN'" ng-false-value=false>SD-REPVPN</label>
+        <label class="checkbox-inline">
+            <input type="checkbox" ng-model="gateway.WALREPVPN"
+                   ng-true-value="'WAL-REPVPN'" ng-false-value=false>WAL-REPVPN</label>
+        <label class="checkbox-inline">
+            <input type="checkbox" ng-model="gateway.MALREPVPN"
+                   ng-true-value="'MAL-REPVPN'" ng-false-value=false>MAL-REPVPN</label>
     </form>
 </div>
 <div class="row">
