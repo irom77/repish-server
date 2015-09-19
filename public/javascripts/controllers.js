@@ -58,10 +58,10 @@ angular.module('controllers', [])
             WALREPVPN: 'WAL-REPVPN',
             MALREPVPN: 'MAL-REPVPN'
         };
-        for (var gw in $scope.gateway) {
-            if ($scope.gateway[gw]) {
-                console.log($scope.gateway[gw]);
-                $scope.updategateways = function () {
+        $scope.updategateways = function () {
+            for (var gw in $scope.gateway) {
+                if ($scope.gateway[gw]) {
+                    console.log($scope.gateway[gw]);
                     apiSvc.post('/api/updategateways/' + $scope.gateway[gw]).success(function (response) {
                         $scope.response = response;
                     })
@@ -69,7 +69,7 @@ angular.module('controllers', [])
                             $scope.response = "NO RESPONSE";
                         }
                     );
-                };
+                }
             }
         }
     })
