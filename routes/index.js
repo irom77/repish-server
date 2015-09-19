@@ -33,7 +33,7 @@ router.post('/api/repcertifcates', function(req, res, next) {
 router.post('/api/updategateways/:id', function(req, res, next) {
     var command = '/var/scripts/repishUpdateGateways ' + req.params.id;
     console.log('---> ', command);
-    exec(command, config.user_host).pipe(res));
+    exec(command, config.user_host).pipe(res);
     //res.send(command + '\n' + config.user_host);
     //SD-REPVPN-02: 'Update CO' operation has finished successfully.
 });
