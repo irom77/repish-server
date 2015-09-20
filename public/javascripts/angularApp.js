@@ -5,6 +5,7 @@ angular.module("angularApp", ['mgcrea.ngStrap', 'ui.router', 'services', 'contro
     .config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
         function ($stateProvider, $urlRouterProvider, $httpProvider) {
             $httpProvider.defaults.useXDomain = true;
+            $httpProvider.defaults.withCredentials = true;
             delete $httpProvider.defaults.headers.common['X-Requested-With'];
             $urlRouterProvider.otherwise('/config');
             $stateProvider

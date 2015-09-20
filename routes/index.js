@@ -2,6 +2,8 @@ var express = require('express');
 var app = express();
 var router = express.Router();
 var path = require('path');
+//var expressJwt = require('express-jwt');
+//config = require('../configure/config');
 //var repcertificates = require('../modules/repcertificates');
 //var updategateways = require('../modules/updategateways');
 var exec = require('ssh-exec');
@@ -14,11 +16,9 @@ client.on('error', function(err) {
     client.end();
 });
 
-/* GET home page. */
-router.get('/', function(req, res,next) {
-    //res.render('index');
-    res.sendFile(path.join(app.get('views') + '/index.html'));
-});
+//var secret = config.secret;
+//var auth = expressJwt({secret: secret});
+//app.use('/api', auth );
 
 router.post('/api/repcertifcates', function(req, res, next) {
   //res.render('test');

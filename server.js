@@ -20,13 +20,20 @@ var routes = require('./routes/index');
 
 var app = express();
 var auth = expressJwt({secret: secret});
-//app.use('/api', auth );
-//app.use('/api', routes);
-app.use('/', routes);
+app.use('/api', auth );
+app.use('/api', routes);
+
+//app.use('/', routes);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 //app.set('view engine', 'ejs');
+
+/* GET home page. */
+app.get('/', function(req, res,next) {
+    //res.render('index');
+    res.sendFile(path.join(app.get('views') + '/index.html'));
+});
 
 // uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -42,7 +49,7 @@ app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
     next();
 });
-
+/*
 app.use(function (req, res, next) {
     if (!req.secure) {
         port = app.get('port');
@@ -52,6 +59,7 @@ app.use(function (req, res, next) {
     }
     next();
 });
+*/
 
 app.use(passport.initialize());
 
@@ -60,7 +68,7 @@ passport.use(new LocalStrategy(
         if (!username.match(/@/)) username = username.concat(config.domain);
         ad.authenticate(username, password, function (err, isAuthenticated) {
             if (err) return done(err, null);
-            console.log('---> passport ad.authenticate says', isAuthenticated);
+            console.log('---> ad.authenticate says ', isAuthenticated);
             if (isAuthenticated) {
                 if (config.user.indexOf(username.replace(config.domain, '')) >= 0)
                     return done(null, {
@@ -73,6 +81,7 @@ passport.use(new LocalStrategy(
                             console.log('ERROR: ' + JSON.stringify(err));
                             return;
                         }
+                        console.log('---> ad.isUserMemberOf says ' + groupName, isMember);
                         if (isMember) return done(null, {
                             username: username,
                             group: groupName
