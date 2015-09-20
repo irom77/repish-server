@@ -1,7 +1,7 @@
 /**
  * Created by IrekRomaniuk on 9/17/2015.
  */
-angular.module('services', ['angular-jwt','ngResource'])
+angular.module('services', ['angular-jwt'])
     .service('CounterSvc', function ($http) {
         this.incCounter = function (name) {
             return $http.post('https://repish:3443/api/counter/' + name);

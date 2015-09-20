@@ -9,45 +9,49 @@ var config = require('./../configure/config');
 var redis = require("redis"),
     client = redis.createClient(); //port,host
 
-client.on('error', function(err) {
+client.on('error', function (err) {
     console.log("Error " + err);
     client.end();
 });
+var isWin = /^win/.test(process.platform);
 
 /* GET home page. */
-router.get('/', function(req, res,next) {
+router.get('/', function (req, res, next) {
     //res.render('index');
     res.sendFile(path.join(app.get('views') + '/index.html'));
 });
 
-router.post('/api/repcertifcates', function(req, res, next) {
-  //res.render('test');
-  //res.json({name: 'foo'});
-  // data = req.body.RoboName;
+router.post('/api/repcertifcates', function (req, res, next) {
+    //res.render('test');
+    //res.json({name: 'foo'});
+    // data = req.body.RoboName;
 //data = repcertificates(req.body.RoboName);//TESTED SUCCESS 'Irek_Test_1100', API_Test_1100
-  data = "Under Development\n";
-  res.send(data);
-  //verify with 'cpca_client lscert -kind SIC -stat Pending | grep -A 2 RoboName'
+    data = "Under Development\n";
+    res.send(data);
+    //verify with 'cpca_client lscert -kind SIC -stat Pending | grep -A 2 RoboName'
 });
 
-router.post('/api/updategateways/:id', function(req, res, next) {
+router.post('/api/updategateways/:id', function (req, res, next) {
     var command = '/var/scripts/repishUpdateGateways ' + req.params.id;
-    exec(command, config.user_host).pipe(res);
-    //res.send(command + '\n' + config.user_host);
+    //console.log(isWin);
+    if (isWin)
+        res.send(command + '\n');
+    else
+        exec(command, config.user_host).pipe(res);
 });
 
 
-router.post('/api/counter/:id', function(req, res, next) {
+router.post('/api/counter/:id', function (req, res, next) {
     //client.set('save',1);
-    client.incr(req.params.id, function(err, reply) {
-      res.send(reply);
+    client.incr(req.params.id, function (err, reply) {
+        res.send(reply);
     });
 
 });
-router.get('/api/counter/:id', function(req, res, next) {
-  client.get(req.params.id, function(err, reply) {
-    res.send(reply);
-  });
+router.get('/api/counter/:id', function (req, res, next) {
+    client.get(req.params.id, function (err, reply) {
+        res.send(reply);
+    });
 });
 
 

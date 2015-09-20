@@ -22,8 +22,6 @@ var app = express();
 var auth = expressJwt({secret: secret});
 app.use('/api', auth );
 
-app.use('/', routes);
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 //app.set('view engine', 'ejs');
@@ -111,6 +109,8 @@ app.post('/authenticate', function (req, res, next) {
         }
     })(req, res, next);
 });
+
+app.use('/', routes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -1,7 +1,7 @@
 /**
  * Created by IrekRomaniuk on 9/17/2015.
  */
-angular.module('controllers', [])
+angular.module('controllers', ['ngSanitize'])
     .controller("myConfigGenCtrl", function ($scope, $http, CounterSvc) {
         //$scope.wan = {addr: 'dhcp'}; //initialized in html
         $scope.ssid = {guest: 1};
@@ -52,29 +52,19 @@ angular.module('controllers', [])
             authSvc.logout();
         };
     })
-    .controller('managerCtrl', function ($scope, apiSvc, $http) {
+    .controller('managerCtrl', function ($scope, apiSvc, $sanitize) {
         $scope.gateway = {
             SDREPVPN: 'SD-REPVPN',
             WALREPVPN: 'WAL-REPVPN',
             MALREPVPN: 'MAL-REPVPN'
         };
-        $scope.callRestricted = function () {
-            $scope.message='';
-            $http({url: '/api/restricted', method: 'GET'})
-                .success(function (data, status, headers, config) {
-                    $scope.message += '' + data.name; // Should log 'foo'
-                })
-                .error(function (data, status, headers, config) {
-                    $scope.message = data; // alert(data);
-                });
-        };
         $scope.updategateways = function () {
-            $scope.response = "";
+            $scope.response = '';
             for (var gw in $scope.gateway) {
                 if ($scope.gateway[gw]) {
                     //console.log($scope.gateway[gw]);
                     apiSvc.post('/api/updategateways/' + $scope.gateway[gw]).success(function (response) {
-                        $scope.response = response;
+                        $scope.response += '<br>' + response;
                     })
                         .error(function (response) {
                             $scope.response = "NO RESPONSE";
