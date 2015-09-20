@@ -52,7 +52,7 @@ angular.module('services', ['angular-jwt','ngResource'])
                 if ($window.sessionStorage.token) {
                     config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
                 }
-                console.log(config.headers.Authorization);
+                //console.log(config.headers.Authorization);
                 return config;
             },
             responseError: function (rejection) {
