@@ -21,19 +21,12 @@ var routes = require('./routes/index');
 var app = express();
 var auth = expressJwt({secret: secret});
 app.use('/api', auth );
-app.use('/api', routes);
 
-//app.use('/', routes);
+app.use('/', routes);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 //app.set('view engine', 'ejs');
-
-/* GET home page. */
-app.get('/', function(req, res,next) {
-    //res.render('index');
-    res.sendFile(path.join(app.get('views') + '/index.html'));
-});
 
 // uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -49,7 +42,7 @@ app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
     next();
 });
-/*
+
 app.use(function (req, res, next) {
     if (!req.secure) {
         port = app.get('port');
@@ -59,7 +52,6 @@ app.use(function (req, res, next) {
     }
     next();
 });
-*/
 
 app.use(passport.initialize());
 
@@ -104,7 +96,6 @@ app.post('/authenticate', function (req, res, next) {
         if (err) {
             return next(err);
         }
-
         if (user) {
             //console.log(user);
             var profile = {
@@ -113,6 +104,7 @@ app.post('/authenticate', function (req, res, next) {
             };
             //jwt.sign(payload, secretOrPrivateKey, options)
             var token = jwt.sign(profile, secret, {expiresInMinutes: 10}); //60 min in prod
+            //console.log('--->', token);
             return res.json({token: token});
         } else {
             return res.status(401).json(info);

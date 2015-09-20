@@ -2,8 +2,6 @@ var express = require('express');
 var app = express();
 var router = express.Router();
 var path = require('path');
-//var expressJwt = require('express-jwt');
-//config = require('../configure/config');
 //var repcertificates = require('../modules/repcertificates');
 //var updategateways = require('../modules/updategateways');
 var exec = require('ssh-exec');
@@ -16,9 +14,11 @@ client.on('error', function(err) {
     client.end();
 });
 
-//var secret = config.secret;
-//var auth = expressJwt({secret: secret});
-//app.use('/api', auth );
+/* GET home page. */
+router.get('/', function(req, res,next) {
+    //res.render('index');
+    res.sendFile(path.join(app.get('views') + '/index.html'));
+});
 
 router.post('/api/repcertifcates', function(req, res, next) {
   //res.render('test');
@@ -32,9 +32,9 @@ router.post('/api/repcertifcates', function(req, res, next) {
 
 router.post('/api/updategateways/:id', function(req, res, next) {
     var command = '/var/scripts/repishUpdateGateways ' + req.params.id;
-    console.log('---> ', command);
-    exec(command, config.user_host).pipe(res);
-    //res.send(command + '\n' + config.user_host);
+    //console.log('---> ', command);
+    //exec(command, config.user_host).pipe(res);
+    res.send(command + '\n' + config.user_host);
     //SD-REPVPN-02: 'Update CO' operation has finished successfully.
 });
 

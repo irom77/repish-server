@@ -52,11 +52,21 @@ angular.module('controllers', [])
             authSvc.logout();
         };
     })
-    .controller('managerCtrl', function ($scope, apiSvc) {
+    .controller('managerCtrl', function ($scope, apiSvc, $http) {
         $scope.gateway = {
             SDREPVPN: 'SD-REPVPN',
             WALREPVPN: 'WAL-REPVPN',
             MALREPVPN: 'MAL-REPVPN'
+        };
+        $scope.callRestricted = function () {
+            $scope.message='';
+            $http({url: '/api/restricted', method: 'GET'})
+                .success(function (data, status, headers, config) {
+                    $scope.message += '' + data.name; // Should log 'foo'
+                })
+                .error(function (data, status, headers, config) {
+                    $scope.message = data; // alert(data);
+                });
         };
         $scope.updategateways = function () {
             $scope.response = "";
@@ -87,6 +97,8 @@ angular.module('controllers', [])
             authSvc.login($scope.user).success(function (data, status, headers, config) {
                 $scope.error = '';
                 var date = new Date();
+                $window.sessionStorage.token = data.token;
+                //console.log($window.sessionStorage.token);
                 $window.localStorage['repish'] = data.token;
                 $scope.isAuthenticated = true;
                 var profile = authSvc.get();
