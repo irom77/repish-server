@@ -58,8 +58,10 @@ angular.module('controllers', ['ngSanitize'])
             WALREPVPN: 'WAL-REPVPN',
             MALREPVPN: 'MAL-REPVPN'
         };
+        //$scope.isProcessing = false;
         $scope.updategateways = function () {
             $scope.response = '';
+            //$scope.isProcessing = true;
             for (var gw in $scope.gateway) {
                 if ($scope.gateway[gw]) {
                     //console.log($scope.gateway[gw]);
@@ -72,13 +74,14 @@ angular.module('controllers', ['ngSanitize'])
                     );
                 }
             }
+            //$scope.isProcessing = false;
         }
     })
     .controller('authCtrl', function ($scope, $window, authSvc, $state) {
         /*$scope.pageClass = function (path) {
          return (path == $location.path()) ? 'active' : '';
          };*/
-        $scope.user = {username: 'irekromaniuk', password: ''};
+        $scope.user = {username: '', password: ''};
         $scope.isAuthenticated = false;
         $scope.welcome = '';
         $scope.error = '';

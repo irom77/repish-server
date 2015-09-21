@@ -1,7 +1,7 @@
 /**
  * Created by irekromaniuk on 8/10/2015.
  */
-angular.module("angularApp", ['mgcrea.ngStrap', 'ui.router', 'services', 'controllers'])
+angular.module("angularApp", ['mgcrea.ngStrap', 'ui.router', 'services', 'controllers','directives'])
     .config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
         function ($stateProvider, $urlRouterProvider, $httpProvider) {
             $httpProvider.interceptors.push('authInterceptor');

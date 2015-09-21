@@ -34,8 +34,11 @@ router.post('/api/repcertifcates', function (req, res, next) {
 router.post('/api/updategateways/:id', function (req, res, next) {
     var command = '/var/scripts/repishUpdateGateways ' + req.params.id;
     //console.log(isWin);
-    if (isWin)
-        res.send(command + '\n');
+    if (isWin) {
+        setTimeout(function () {
+            res.send(command + '\n');
+        }, 5000);
+    }
     else
         exec(command, config.user_host).pipe(res);
 });
