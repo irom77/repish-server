@@ -78,9 +78,6 @@ angular.module('controllers', ['ngSanitize'])
         }
     })
     .controller('authCtrl', function ($scope, $window, authSvc, $state) {
-        /*$scope.pageClass = function (path) {
-         return (path == $location.path()) ? 'active' : '';
-         };*/
         $scope.user = {username: '', password: ''};
         $scope.isAuthenticated = false;
         $scope.welcome = '';

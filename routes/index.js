@@ -37,7 +37,7 @@ router.post('/api/updategateways/:id', function (req, res, next) {
     if (isWin) {
         setTimeout(function () {
             res.send(command + '\n');
-        }, 5000);
+        }, 3000);
     }
     else
         exec(command, config.user_host).pipe(res);
