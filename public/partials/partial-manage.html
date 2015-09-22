@@ -23,7 +23,7 @@
                     ng-disabled="AddROBOForm.$invalid">Add ROBO Gateway</button>
             <!--label for="hostname">Hostname</label-->
             <input type="text" ng-model="hostname" class="form-control" id="hostname" size="21"
-                   placeholder="ROBOName" required ng-pattern="/^[a-zA-Z]+[0-9]+$/">
+                   placeholder="ROBOName" required ng-pattern="/^[a-zA-Z]{6,}[0-9]{6,}$/">
             <!--button class="btn btn-default btn-circle" bs-popover="popover">?</button-->
 
             <!--label for="subnet">Subnet</label-->
@@ -34,8 +34,7 @@
         </div>
     </form>
 </div>
-<div class="row">
-    <br>
+<div class="row-fixed-height">
     <p ng-bind-html="responseAddROBO"></p>
 </div>
 

@@ -59,7 +59,7 @@ angular.module('controllers', ['ngSanitize'])
             MALREPVPN: 'MAL-REPVPN'
         };
         $scope.updategateways = function () {
-            $scope.responseCO = '';
+            $scope.responseCO = 'Only one click allowed. Updating ... ';
             for (var gw in $scope.gateway) {
                 if ($scope.gateway[gw]) {
                     //console.log($scope.gateway[gw]);
@@ -77,9 +77,10 @@ angular.module('controllers', ['ngSanitize'])
             var ROBO = { host: $scope.hostname,
                 subnet: $scope.subnet };
             //console.log(ROBO);
+            $scope.responseAddROBO = 'Adding ROBO ' + $scope.hostname + ' with subnet ' + $scope.subnet + '0<br>';
             apiSvc.post('/api/addrobo/', ROBO).then(
                 function (response) {
-                $scope.responseAddROBO = response.data;
+                $scope.responseAddROBO += response.data;
             },
                 function (response) {
                     $scope.responseAddROBO = "NO RESPONSE";
