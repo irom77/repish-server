@@ -37,12 +37,24 @@ router.post('/api/updategateways/:id', function (req, res, next) {
     if (isWin) {
         setTimeout(function () {
             res.send(command + '\n');
-        }, 3000);
+        }, 1000);
     }
     else
         exec(command, config.user_host).pipe(res);
 });
 
+router.post('/api/addrobo/', function (req, res, next) {
+    var command = '/var/scripts/repishAddROBO ' + req.body.host + ' ' + req.body.subnet.replace(/.$/,"");
+    //console.log(command);
+    //console.log(isWin);
+    if (isWin) {
+        setTimeout(function () {
+            res.send(command + '\n');
+        }, 1000);
+    }
+    else
+        exec(command, config.user_host).pipe(res);
+});
 
 router.post('/api/counter/:id', function (req, res, next) {
     //client.set('save',1);

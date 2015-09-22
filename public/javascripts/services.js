@@ -66,10 +66,10 @@ angular.module('services', ['angular-jwt'])
     })
     .factory("apiSvc", function($http) {
         return {
-            post: function(url) {
-                return $http.post(url).success(function(response) {
+            post: function(url,data) {
+                return $http.post(url,data)/*.success(function(response) {
                     return response
-                });
+                });*/
             }
         }
     });

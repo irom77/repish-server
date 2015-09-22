@@ -21,6 +21,11 @@ input.ng-invalid {
 
 .navbar { border-radius:0; }
 
+.row-fixed-height {
+  height: 5em;
+  //overflow: scroll;
+}
+
 /*div {
   //margin: 10px 10px 10px 10px;
   top: 10px;

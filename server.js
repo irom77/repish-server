@@ -101,7 +101,7 @@ app.post('/authenticate', function (req, res, next) {
                 group: user.group
             };
             //jwt.sign(payload, secretOrPrivateKey, options)
-            var token = jwt.sign(profile, secret, {expiresInMinutes: 10}); //60 min in prod
+            var token = jwt.sign(profile, secret, {expiresInMinutes: 60*8}); //60 min in prod
             //console.log('--->', token);
             return res.json({token: token});
         } else {

@@ -1,6 +1,6 @@
 <div class="row">
     <form name="myForm">
-        <button click-once type="button" class="btn btn-primary" ng-click="updategateways()">Update CO Gateways</button>
+        <button clickonce type="button" class="btn btn-primary" ng-click="updategateways()">Update CO Gateways</button>
         <label class="checkbox-inline">
             <input type="checkbox" ng-model="gateway.SDREPVPN"
                    ng-true-value="'SD-REPVPN'" ng-false-value=false>SD-REPVPN</label>
@@ -12,35 +12,20 @@
                    ng-true-value="'MAL-REPVPN'" ng-false-value=false>MAL-REPVPN</label>
     </form>
 </div>
-<div class="row">
-    <p ng-bind-html="response"></p>
-</div>
-
-<!--
-<hr>
-<div class="row">
-    <form class="form-inline">
-        <div class="form-group">
-            <button type="button" class="btn btn-danger" ng-click="">Reset Certificate</button>
-            <select name=cert" ng-model="cert">
-                <option selected value="SIC">SIC</option>
-                <option value="VPN">VPN</option>
-            </select>
-            <input type="text" ng-model="Name" class="form-control" placeholder="ROBOName" size="21">
-        </div>
-    </form>
+<div class="row-fixed-height">
+    <p ng-bind-html="responseCO"></p>
 </div>
 <hr>
 <div class="row">
     <form class="form-inline">
         <div class="form-group">
-            <button type="button" class="btn btn-default" ng-click="">SamrtPro addROBO</button>
-            <label for="hostname">Hostname</label>
+            <button type="button" class="btn btn-primary" ng-click="addrobo()" ng-disabled="false">Add ROBO Gateway</button>
+            <!--label for="hostname">Hostname</label-->
             <input type="text" ng-model="hostname" class="form-control" id="hostname" size="21"
                    placeholder="ROBOName">
-            <button class="btn btn-default btn-circle" bs-popover="popover">?</button>
+            <!--button class="btn btn-default btn-circle" bs-popover="popover">?</button-->
 
-            <label for="subnet">Subnet</label>
+            <!--label for="subnet">Subnet</label-->
             <input type="text" ng-model="subnet" class="form-control" id="subnet" size="6"
                    placeholder="Subnet" required ng-pattern="/^(?:[0-9]{1,3}\.){3}$/">
 
@@ -48,4 +33,8 @@
         </div>
     </form>
 </div>
--->
+<div class="row">
+    <br>
+    {{responseAddROBO}}
+</div>
+

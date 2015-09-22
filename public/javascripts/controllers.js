@@ -58,23 +58,35 @@ angular.module('controllers', ['ngSanitize'])
             WALREPVPN: 'WAL-REPVPN',
             MALREPVPN: 'MAL-REPVPN'
         };
-        //$scope.isProcessing = false;
         $scope.updategateways = function () {
-            $scope.response = '';
-            //$scope.isProcessing = true;
+            $scope.responseCO = '';
             for (var gw in $scope.gateway) {
                 if ($scope.gateway[gw]) {
                     //console.log($scope.gateway[gw]);
                     apiSvc.post('/api/updategateways/' + $scope.gateway[gw]).success(function (response) {
-                        $scope.response += '<br>' + response;
+                        $scope.responseCO += '<br>' + response;
                     })
                         .error(function (response) {
-                            $scope.response = "NO RESPONSE";
+                            $scope.responseCO = "NO RESPONSE";
                         }
                     );
                 }
             }
-            //$scope.isProcessing = false;
+        };
+        $scope.addrobo = function () {
+            var ROBO = { host: $scope.hostname,
+                subnet: $scope.subnet };
+            //console.log(ROBO);
+            apiSvc.post('/api/addrobo/', ROBO).then(
+                function (response) {
+                $scope.responseAddROBO = response.data;
+            },
+                function (response) {
+                    $scope.responseAddROBO = "NO RESPONSE";
+                }
+            );
+            $scope.hostname = '';
+            $scope.subnet = '';
         }
     })
     .controller('authCtrl', function ($scope, $window, authSvc, $state) {
