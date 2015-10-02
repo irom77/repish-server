@@ -61,7 +61,7 @@ gulp.task('test-include', function() {
 });
 
 gulp.task('copy', function () {
-    run('cd ..; ../copy-repish-server-PROD.sh').exec();
+    run('../copy-repish-server-PROD.sh').exec(); //cd ..;
     //run('../test.sh').exec()
 });
 

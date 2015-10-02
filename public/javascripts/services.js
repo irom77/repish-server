@@ -67,7 +67,7 @@ angular.module('services', ['angular-jwt'])
     .factory("apiSvc", function($http) {
         return {
             post: function(url,data) {
-                return $http.post(url,data)/*.success(function(response) {
+                return $http.post(url,data);/*.success(function(response) {
                     return response
                 });*/
             }

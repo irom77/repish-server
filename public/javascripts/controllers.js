@@ -58,6 +58,12 @@ angular.module('controllers', ['ngSanitize'])
             WALREPVPN: 'WAL-REPVPN',
             MALREPVPN: 'MAL-REPVPN'
         };
+        $scope.COSelected = function () {
+            for (var gw in $scope.gateway) {
+                if ($scope.gateway[gw]) return true;
+            }
+            return false;
+        };
         $scope.updategateways = function () {
             $scope.responseCO = 'Only one click allowed. Updating ... ';
             for (var gw in $scope.gateway) {
@@ -71,6 +77,7 @@ angular.module('controllers', ['ngSanitize'])
                         }
                     );
                 }
+                //else $scope.responseCO = "NO GATEWAYS SELECTED";
             }
         };
         $scope.addrobo = function () {
