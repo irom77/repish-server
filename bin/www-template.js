@@ -19,7 +19,7 @@ var credentials = {key: privateKey, cert: certificate};
  */
 // @if ENV='production'
 var port = normalizePort(process.env.PORT || '3000');
-var httpsPort = normalizePort(process.env.httpsPORT || '8443');
+var httpsPort = normalizePort(process.env.httpsPORT || '3443');
 // @endif
 // @if ENV='development'
 var port = normalizePort(process.env.PORT || '3001');

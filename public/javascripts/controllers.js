@@ -95,6 +95,18 @@ angular.module('controllers', ['ngSanitize'])
             );
             $scope.hostname = '';
             $scope.subnet = '';
+        };
+        $scope.cert = "VPN";
+        $scope.resetcert = function () {
+            $scope.responseResetROBO = 'Reset ' + $scope.cert + ' in progress ... ';
+                    //console.log($scope.hostname, $scope.cert);
+                    apiSvc.post('/api/repcertifcates/' + $scope.hostname + $scope.cert).success(function (response) {
+                        $scope.responseResetROBO += '<br>' + response;
+                    })
+                        .error(function (response) {
+                            $scope.responseResetROBO = "NO RESPONSE";
+                        }
+                    );
         }
     })
     .controller('authCtrl', function ($scope, $window, authSvc, $state) {

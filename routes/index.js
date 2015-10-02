@@ -21,14 +21,17 @@ router.get('/', function (req, res, next) {
     res.sendFile(path.join(app.get('views') + '/index.html'));
 });
 
-router.post('/api/repcertifcates', function (req, res, next) {
-    //res.render('test');
-    //res.json({name: 'foo'});
-    // data = req.body.RoboName;
-//data = repcertificates(req.body.RoboName);//TESTED SUCCESS 'Irek_Test_1100', API_Test_1100
-    data = "Under Development\n";
-    res.send(data);
+router.post('/api/repcertifcates/:id', function (req, res, next) {
+    //data = repcertificates(req.body.RoboName);//TESTED SUCCESS 'Irek_Test_1100', API_Test_1100
+    var command = '/var/scripts/repishReset ' + req.params.id;
     //verify with 'cpca_client lscert -kind SIC -stat Pending | grep -A 2 RoboName'
+    if (isWin) {
+        setTimeout(function () {
+            res.send(command + '\n');
+        }, 1000);
+    }
+    else
+        exec(command, config.user_host).pipe(res);
 });
 
 router.post('/api/updategateways/:id', function (req, res, next) {
