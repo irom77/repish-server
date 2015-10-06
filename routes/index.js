@@ -22,9 +22,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/api/repcertifcates/:id', function (req, res, next) {
-    //data = repcertificates(req.body.RoboName);//TESTED SUCCESS 'Irek_Test_1100', API_Test_1100
     var command = '/var/scripts/repishReset ' + req.params.id;
-    //verify with 'cpca_client lscert -kind SIC -stat Pending | grep -A 2 RoboName'
     if (isWin) {
         setTimeout(function () {
             res.send(command + '\n');

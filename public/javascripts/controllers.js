@@ -100,7 +100,8 @@ angular.module('controllers', ['ngSanitize'])
         $scope.resetcert = function () {
             $scope.responseResetROBO = 'Reset ' + $scope.cert + ' in progress ... ';
                     //console.log($scope.hostname, $scope.cert);
-                    apiSvc.post('/api/repcertifcates/' + $scope.hostname + $scope.cert).success(function (response) {
+                    apiSvc.post('/api/repcertifcates/' + $scope.hostname + ' ' + $scope.cert)
+                        .success(function (response) {
                         $scope.responseResetROBO += '<br>' + response;
                     })
                         .error(function (response) {
