@@ -12,6 +12,7 @@ config = require('./configure/config');
 var ad = new ActiveDirectory(config.AD);
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var bcrypt = require('bcryptjs');
 
 var secret = config.secret;
 
@@ -56,6 +57,14 @@ app.use(passport.initialize());
 passport.use(new LocalStrategy(
     function (username, password, done) {
         if (!username.match(/@/)) username = username.concat(config.domain);
+        //console.log(username, config.local[0].user1[0]);
+        if (username == config.local[0].user1[0] + config.domain)
+            if (bcrypt.compareSync(password, config.local[0].user1[1]))
+                return done(null, {
+                    username: username,
+                    group: 'HDLevel'
+                });
+            //console.log('nice');
         ad.authenticate(username, password, function (err, isAuthenticated) {
             if (err) return done(err, null);
             console.log('---> ad.authenticate says ', isAuthenticated);

@@ -18,8 +18,8 @@ angular.module('controllers', ['ngSanitize'])
             if ($scope.ssid.guest == 0) data = data.replace(/#Guest.*(?:\n.*){7}/g, '');
             data = data.replace(/\n/g, '\r\n');
             var blob = new Blob([data], {type: "text/plain;charset=utf-8"});
-            filename = "autoconf.clish";
-            saveAs(blob, filename);
+            filename = "autoconf.clish"; //.replace("\u00EF\u00BB\u00BF", "");
+            saveAs(blob, filename, true);
             $scope.Counter('save');
         };
         $scope.popover = {
