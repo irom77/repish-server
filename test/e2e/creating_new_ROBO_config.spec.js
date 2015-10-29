@@ -29,8 +29,9 @@ describe('adding new ROBO config', function() {
             expect(text).to.contain(hostname, subnet, contact, location,
                 InternalSSID , GuestSSID, InternalPW,GuestPW);
         });
-        //element(by.css('.config1100 .btn btn-default btn-lg')).click();
+        //element(by.css('.config1100 .btn .btn-default .btn-lg')).click();
+        element(by.buttonText('Save')).click();
         //browser.pause()
-    })
+    });
 
 });
