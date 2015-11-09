@@ -1,3 +1,6 @@
+exec('ls -lh', 'ubuntu@my-remote.com').on('error', function(e) {
+console.log('ERROR', e);
+}).pipe(process.stdout)
 ----------------------------------------------------------------
 npm remotely to replace npm ssh-exec 
 ----------------------------------------------------------------
@@ -9,7 +12,6 @@ logout based on token
 ----------------------------------------------------------------
 linux try redirect 2>&1 etc
 ----------------------------------------------------------------
-
 Welcome, invalid credentials or not auth 
 Logout
 ----------------------------------------------------------------
@@ -36,5 +38,5 @@ Name            ID              Cluster ID      IP              Type            
 Irek_Test_1100-35       0.0.9.75        -       -       "VPN-1 Express/Pro ROBO"        R75.30  Standard_Office_1100    Waiting Waiting CN=Irek_Test_1100-35,O=repvpnsc1w.commonwealth.com.q6s9sk       "CN=Irek_Test_1100-35 VPN Certificate,O=repvpnsc1w.commonwealth.com.q6s9sk" -
 
 
-[Expert@provider1w:0]# LSMcli 10.29.21.237 CPService IHateMundays1! Show -N=Not_Existing
+[Expert@provider1w:0]# LSMcli 10.29.21.237 user password Show -N=Not_Existing
  Failed to query table robo_gateways

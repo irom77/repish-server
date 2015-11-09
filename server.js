@@ -64,7 +64,6 @@ passport.use(new LocalStrategy(
                     username: username,
                     group: 'HDLevel'
                 });
-            //console.log('nice');
         ad.authenticate(username, password, function (err, isAuthenticated) {
             if (err) return done(err, null);
             console.log('---> ad.authenticate says ', isAuthenticated);

@@ -41,7 +41,10 @@ router.post('/api/updategateways/:id', function (req, res, next) {
         }, 1000);
     }
     else
-        exec(command, config.user_host).pipe(res);
+        exec(command, config.user_host).on('error', function(e) {
+            console.log('ERROR', e);
+            res.send("SSH NO RESPONSE" + '\n');
+        }).pipe(res);
 });
 
 router.post('/api/addrobo/', function (req, res, next) {
