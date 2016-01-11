@@ -14,6 +14,7 @@ client.on('error', function (err) {
     client.end();
 });
 var isWin = /^win/.test(process.platform);
+var isVagrant = /vagrant/.test(require("os").hostname());
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -23,7 +24,7 @@ router.get('/', function (req, res, next) {
 
 router.post('/api/repcertifcates/:id', function (req, res, next) {
     var command = '/var/scripts/repishReset ' + req.params.id;
-    if (isWin) {
+    if (isWin || isVagrant) {
         setTimeout(function () {
             res.send(command + '\n');
         }, 1000);
@@ -38,7 +39,7 @@ router.post('/api/repcertifcates/:id', function (req, res, next) {
 router.post('/api/updategateways/:id', function (req, res, next) {
     var command = '/var/scripts/repishUpdateGateways ' + req.params.id;
     //console.log(isWin);
-    if (isWin) {
+    if (isWin || isVagrant) {
         setTimeout(function () {
             res.send(command + '\n');
         }, 1000);
@@ -54,7 +55,7 @@ router.post('/api/addrobo/', function (req, res, next) {
     var command = '/var/scripts/repishAddROBO ' + req.body.host + ' ' + req.body.subnet.replace(/.$/,"");
     //console.log(command);
     //console.log(isWin);
-    if (isWin) {
+    if (isWin || isVagrant) {
         setTimeout(function () {
             res.send(command + '\n');
         }, 1000);
