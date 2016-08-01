@@ -16,6 +16,12 @@ angular.module("angularApp", ['mgcrea.ngStrap', 'ui.router', 'services', 'contro
                     templateUrl: 'partials/partial-config.html',
                     authenticate: false
                 })
+                .state('config2', {
+                    url: '/config2',
+                    controller: 'myConfigGenCtrl',
+                    templateUrl: 'partials/partial-config2.html',
+                    authenticate: false
+                })
                 .state('manage', {
                     url: '/manage',
                     controller: 'managerCtrl',
@@ -33,7 +39,7 @@ angular.module("angularApp", ['mgcrea.ngStrap', 'ui.router', 'services', 'contro
     .run(function($rootScope, $state, authSvc) {
         $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
             if (toState.authenticate && authSvc.get().exp<0){ //
-                // User isn’t authenticated
+                // User isnï¿½t authenticated
                 //console.log('Redirected ', authSvc.get().exp);
                 $state.transitionTo('login');
                 event.preventDefault();
